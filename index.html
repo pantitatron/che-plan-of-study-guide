@@ -148,6 +148,19 @@ ol.check li::before{content:counter(c);position:absolute;left:20px;top:15px;
 footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
   color:var(--ink-2);font-size:13.5px}
 
+
+.lang-switch{margin-left:auto;display:flex;align-items:center;gap:3px;padding:4px;
+  background:var(--card);border:1px solid var(--line);border-radius:99px;flex:none}
+.lang-btn{border:0;background:transparent;color:var(--ink-2);font-family:"IBM Plex Sans Thai",sans-serif;
+  font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:99px;cursor:pointer;line-height:1.2}
+.lang-btn:hover{color:var(--teal-deep)}
+.lang-btn.active{background:var(--teal);color:#fff}
+@media print{.lang-switch{display:none}}
+@media (max-width:620px){
+  .lang-switch{position:sticky;right:0;box-shadow:-10px 0 14px var(--paper)}
+  .lang-btn{padding:5px 8px}
+}
+
 @media print{
   body{background:#fff;font-size:11.5pt} nav.bar,.mapctl,.mapbox,.panel,.legend{display:none}
   header.top{background:#fff;color:#000;border-bottom:3px solid #000}
@@ -176,6 +189,10 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
   <a href="#terms">ตาราง 8 เทอม</a>
   <a href="#blast">ถ้าตกวิชานี้</a>
   <a href="#check">เช็กลิสต์</a>
+  <div class="lang-switch" role="group" aria-label="Language selection">
+    <button type="button" class="lang-btn active" id="langTh" aria-pressed="true">ไทย</button>
+    <button type="button" class="lang-btn" id="langEn" aria-pressed="false">EN</button>
+  </div>
 </div></nav>
 
 <div class="wrap">
@@ -290,6 +307,7 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
 </div>
 
 <script>
+
 const CHM3=["CHM10301","CHM10302","CHM10303"];
 const T=[
  {n:"เทอม 1",s:"ปี 1 · ภาค 1",cr:"18(15-7-36)",c:[
@@ -373,107 +391,178 @@ const T=[
   {k:"XXX xxx.",t:"วิชาเลือกเสรี II",u:"3(3-0-6)",g:1}]}
 ];
 
+const UI={
+ th:{
+  title:"คู่มือแผนการเรียน วิศวกรรมเคมี มจธ. (หลักสูตร 2568)",
+  modePath:"โหมด: ดูสายวิชา",modeFail:"โหมด: ถ้าตกวิชานี้",clear:"ล้างการเลือก",
+  emptyMap:"แตะวิชาใดวิชาหนึ่งในผังด้านบน เพื่อดูเงื่อนไขและสายวิชาที่เกี่ยวข้อง",
+  none:"— ไม่มี —",failThis:"ถ้าติด F ตัวนี้",blockedSummary:n=>`จะลงอีก <strong style="margin:0 4px">${n}</strong> วิชาไม่ได้ จนกว่าจะซ่อมผ่าน`,
+  noImpact:"ไม่กระทบวิชาอื่น",blockedCourses:"วิชาที่โดนบล็อก",prereq:"ต้องผ่านก่อน",
+  coreq:"ต้องลงพร้อมกัน",unlocks:"ปลดล็อกวิชาต่อ",course:"วิชา",credits:"หน่วยกิต",
+  prereqHeader:"ต้องผ่านก่อน",coreqName:"ลงพร้อม / ชื่อวิชา",blastFail:"ถ้าติด F วิชานี้",
+  blastBlocked:"จะลงวิชาเหล่านี้ไม่ได้"
+ },
+ en:{
+  title:"KMUTT Chemical Engineering Study Plan Guide (B.E. 2568 Curriculum)",
+  modePath:"Mode: Course pathway",modeFail:"Mode: If this course is failed",clear:"Clear selection",
+  emptyMap:"Select a course in the map above to view its requirements and related course pathway.",
+  none:"— None —",failThis:"If this course is failed",blockedSummary:n=>`You will be unable to register for <strong style="margin:0 4px">${n}</strong> additional course(s) until the failed course is passed.`,
+  noImpact:"No other course is affected",blockedCourses:"Blocked courses",prereq:"Prerequisites",
+  coreq:"Corequisites",unlocks:"Courses unlocked",course:"Course",credits:"Credits",
+  prereqHeader:"Prerequisite",coreqName:"Corequisite / Course name",blastFail:"If this course is failed",
+  blastBlocked:"These courses become unavailable"
+ }
+};
+
+const TERM_EN=[
+ {n:"Semester 1",s:"Year 1 · Semester 1"},{n:"Semester 2",s:"Year 1 · Semester 2"},
+ {n:"Semester 3",s:"Year 2 · Semester 1"},{n:"Semester 4",s:"Year 2 · Semester 2"},
+ {n:"Semester 5",s:"Year 3 · Semester 1"},{n:"Semester 6",s:"Year 3 · Semester 2"},
+ {n:"Summer Term",s:"After Year 3"},{n:"Semester 7",s:"Year 4 · Semester 1"},
+ {n:"Semester 8",s:"Year 4 · Semester 2"}
+];
+
+const COURSE_EN={
+ "— โมดูล 2":"— Module 2","— โมดูล 3":"— Module 3",
+ "Math III (1 นก.)":"Math III (1 credit)","Math III (2 นก.)":"Math III (2 credits)",
+ "วิชาเลือก GEN I":"General Education Elective I","วิชาเลือก GEN II":"General Education Elective II",
+ "วิชาเลือก ChE I":"Chemical Engineering Elective I","วิชาเลือก ChE II":"Chemical Engineering Elective II",
+ "วิชาเลือกเสรี I":"Free Elective I","วิชาเลือกเสรี II":"Free Elective II"
+};
+
+function loadSavedLang(){try{return localStorage.getItem('cheGuideLang')==='en'?'en':'th';}catch(e){return 'th';}}
+function saveLang(lang){try{localStorage.setItem('cheGuideLang',lang);}catch(e){}}
+let LANG=loadSavedLang();
+let SEL=null,FAILMODE=false;
 const M={},TERMOF={};
 T.forEach((t,ti)=>t.c.forEach(c=>{c.p=c.p||[];c.o=c.o||[];M[c.k]=c;TERMOF[c.k]=ti}));
 const childrenPre={},childrenCo={};
 Object.values(M).forEach(c=>{
-  c.p.forEach(k=>(childrenPre[k]=childrenPre[k]||[]).push(c.k));
-  c.o.forEach(k=>(childrenCo[k]=childrenCo[k]||[]).push(c.k));
+ c.p.forEach(k=>(childrenPre[k]=childrenPre[k]||[]).push(c.k));
+ c.o.forEach(k=>(childrenCo[k]=childrenCo[k]||[]).push(c.k));
 });
 const nice=k=>k.replace(/\.$/,'');
+const tr=k=>UI[LANG][k];
+const termName=(t,i)=>LANG==='en'?TERM_EN[i].n:t.n;
+const termSub=(t,i)=>LANG==='en'?TERM_EN[i].s:t.s;
+const courseText=c=>LANG==='en'?(COURSE_EN[c.t]||c.t):c.t;
+const unitText=c=>LANG==='en'&&c.u.startsWith('รวมใน ')?'Included in '+c.u.slice(6):c.u;
 
 function blast(k){
-  const blocked=new Set(); let grew=true;
-  while(grew){ grew=false;
-    Object.values(M).forEach(c=>{
-      if(blocked.has(c.k))return;
-      const hit=c.p.some(x=>x===k||blocked.has(x)) || c.o.some(x=>blocked.has(x));
-      if(hit){blocked.add(c.k);grew=true;}
-    });
-  }
-  return blocked;
+ const blocked=new Set();let grew=true;
+ while(grew){grew=false;Object.values(M).forEach(c=>{
+  if(blocked.has(c.k))return;
+  const hit=c.p.some(x=>x===k||blocked.has(x))||c.o.some(x=>blocked.has(x));
+  if(hit){blocked.add(c.k);grew=true;}
+ });}
+ return blocked;
 }
 
-let SEL=null, FAILMODE=false;
-const grid=document.getElementById('grid'), panel=document.getElementById('panel');
-T.forEach(t=>{
-  const col=document.createElement('div'); col.className='col';
-  col.innerHTML='<h4>'+t.n+'</h4><span class="cr">'+t.cr+'</span>';
+const STATIC_TRANSLATIONS=[{"selector":"header.top h1","index":0,"en":"Understand Your Study Plan<br>Before You Register"},{"selector":"header.top .wrap > p","index":1,"en":"A plain-language guide to the revised B.E. 2568 Chemical Engineering curriculum for student ID 68, effective from Semester 2/B.E. 2568 — ten minutes of reading may prevent a semester-long delay."},{"selector":"nav.bar a","index":0,"en":"4 Key Rules"},{"selector":"nav.bar a","index":1,"en":"Common Mistakes"},{"selector":"nav.bar a","index":2,"en":"Course Map"},{"selector":"nav.bar a","index":3,"en":"8-Semester Plan"},{"selector":"nav.bar a","index":4,"en":"If You Fail"},{"selector":"nav.bar a","index":5,"en":"Checklist"},{"selector":"#rules h2","index":0,"en":"<span class=\"num\">01</span> Only 4 Rules to Know"},{"selector":"#rules .lede","index":0,"en":"The curriculum map may look complicated, but it is built around only four types of rules. Learn these and you can read the entire map."},{"selector":"#rules .rule strong","index":0,"en":"Must be passed beforehand"},{"selector":"#rules .rule p","index":0,"en":"Parentheses beneath a course name that do <em>not</em> contain “Co.”, such as <span class=\"pill\">CHE210 (CHM10301-3)</span>, mean that all three CHM103 modules must have been passed in an earlier semester before CHE210 can be taken."},{"selector":"#rules .rule strong","index":1,"en":"Must be taken together"},{"selector":"#rules .rule p","index":1,"en":"Parentheses containing <strong>Co.</strong>, such as <span class=\"pill co\">PHY10302 (Co.10301)</span>, mean that PHY10301 must be registered in the same semester whenever PHY10302 is taken, <strong>even if PHY10301 was passed previously</strong>."},{"selector":"#rules .rule strong","index":2,"en":"Courses divided into modules"},{"selector":"#rules .rule p","index":2,"en":"The last two digits identify the module. For example, MTH10101 means MATH101 Module 1. <span class=\"pill\">CHM10301-3</span> is shorthand for Modules 1, 2, and 3 together, and <strong>every listed module</strong> must be passed."},{"selector":"#rules .rule strong","index":3,"en":"Passed = no F grade"},{"selector":"#rules .rule p","index":3,"en":"Any grade other than F counts as a pass and unlocks subsequent courses. A failed course must be repeated in the next semester in which it is offered."},{"selector":"#mistakes h2","index":0,"en":"<span class=\"num\">02</span> The Most Common Registration Mistakes"},{"selector":"#mistakes .lede","index":0,"en":"Two misunderstandings repeatedly cause registration errors. Read these sections carefully before choosing courses."},{"selector":"#mistakes h3","index":0,"en":"A. Modules are checked individually, not as a bundle"},{"selector":"#mistakes h3 + p","index":0,"en":"Many students assume that the whole of MATH101 must be passed before any part of MATH102 can be taken. <strong>This is not correct.</strong> Each MTH102 module has its own prerequisite."},{"selector":"#mistakes table th","index":0,"en":"Module"},{"selector":"#mistakes table th","index":1,"en":"Prerequisite"},{"selector":"#mistakes table th","index":2,"en":"Meaning"},{"selector":"#mistakes table tr:nth-child(2) td","index":1,"en":"— None —"},{"selector":"#mistakes table tr:nth-child(2) td","index":2,"en":"May be taken immediately, whether or not MATH101 has been passed."},{"selector":"#mistakes table tr:nth-child(3) td","index":2,"en":"Linked only to MATH101 Module 1."},{"selector":"#mistakes table tr:nth-child(4) td","index":2,"en":"Linked only to MATH101 Module 2."},{"selector":"#mistakes .ex .head","index":0,"en":"Case 1 — Both MATH101 modules were failed in Semester 1"},{"selector":"#mistakes .ex li","index":0,"en":"In Semester 2, <span class=\"pill\">MTH10201</span> may still be taken because it has no prerequisite."},{"selector":"#mistakes .ex li","index":1,"en":"<span class=\"pill no\">MTH10202</span> and <span class=\"pill no\">MTH10203</span> cannot be taken."},{"selector":"#mistakes .ex li","index":2,"en":"<span class=\"pill co\">MTH10101</span> and <span class=\"pill co\">MTH10102</span> must also be repeated in Semester 2."},{"selector":"#mistakes .ex .head","index":1,"en":"Case 2 — MTH10101 was passed but MTH10102 was failed in Semester 1"},{"selector":"#mistakes .ex li","index":3,"en":"In Semester 2, <span class=\"pill\">MTH10201</span> and <span class=\"pill\">MTH10202</span> may be taken."},{"selector":"#mistakes .ex li","index":4,"en":"<span class=\"pill no\">MTH10203</span> cannot be taken because MTH10102 has not yet been passed."},{"selector":"#mistakes .ex li","index":5,"en":"<span class=\"pill co\">MTH10102</span> must also be repeated in Semester 2."},{"selector":"#mistakes .callout","index":0,"en":"<strong>All required modules must eventually be completed.</strong> A missing module can be carried temporarily, but <span class=\"pill\">MTH20101</span> requires both MTH10202 and MTH10203; <span class=\"pill\">PRE372</span> requires MTH10201, MTH10202, and MTH10203; and <span class=\"pill\">MTH303</span> requires MTH20101 and MTH20102. The longer a module remains incomplete, the more upper-year courses are delayed."},{"selector":"#mistakes h3","index":1,"en":"B. “Co.” means taken together, not passed beforehand"},{"selector":"#mistakes h3 + p","index":1,"en":"This is the most frequently misunderstood rule. The Co. groups are PHY103, PHY104, PHY191, and PHY192. Modules 2 and 3 remain linked to Module 1 every time they are registered."},{"selector":"#mistakes .ex .head","index":2,"en":"Case 3 — PHY10301 was passed but PHY10302 was failed in Semester 1"},{"selector":"#mistakes .ex li","index":6,"en":"In Semester 2, <span class=\"pill no\">PHY10302</span> cannot be registered by itself."},{"selector":"#mistakes .ex li","index":7,"en":"<span class=\"pill co\">PHY10301</span> and <span class=\"pill co\">PHY10302</span> must be registered together, even though PHY10301 was previously passed."},{"selector":"#mistakes .ex .head","index":3,"en":"Case 4 — PHY10301 and PHY10302 were passed, but PHY10303 was failed"},{"selector":"#mistakes .ex li","index":8,"en":"In Semester 2, register <span class=\"pill co\">PHY10301</span> together with <span class=\"pill co\">PHY10303</span>."},{"selector":"#mistakes .ex li","index":9,"en":"PHY10302 does not need to be repeated because PHY10303 is linked only to PHY10301, not to PHY10302."},{"selector":"#mistakes > p","index":3,"en":"The same rule applies to laboratories: <span class=\"pill co\">PHY191 (Co.PHY10301)</span> and <span class=\"pill co\">PHY192 (Co.PHY10401)</span>. To register for a physics laboratory, the linked theory Module 1 must be registered in the same semester."},{"selector":"#map h2","index":0,"en":"<span class=\"num\">03</span> Interactive Course Map"},{"selector":"#map .lede","index":0,"en":"Select any course to see its <strong>prerequisites</strong> and the courses it <strong>unlocks</strong>. Turn on “If this course is failed” mode to see how one F grade can affect the rest of the curriculum."},{"selector":"#map .hint","index":0,"en":"Select a course in the map below"},{"selector":"#map .legend span","index":0,"en":"<i class=\"sw\" style=\"background:var(--ink)\"></i>Selected course"},{"selector":"#map .legend span","index":1,"en":"<i class=\"sw\" style=\"background:var(--brick-pale);border-left:3px solid var(--brick)\"></i>Prerequisite"},{"selector":"#map .legend span","index":2,"en":"<i class=\"sw\" style=\"background:var(--amber-pale);border-left:3px solid var(--amber)\"></i>Corequisite"},{"selector":"#map .legend span","index":3,"en":"<i class=\"sw\" style=\"background:var(--blue-pale);border-left:3px solid var(--blue)\"></i>Unlocked course"},{"selector":"#terms h2","index":0,"en":"<span class=\"num\">04</span> Complete 8-Semester Study Plan"},{"selector":"#terms .lede","index":0,"en":"The “Prerequisite” column lists courses that must already have been passed. The “Corequisite / Course name” column shows courses that must appear in the same registration record."},{"selector":"#blast h2","index":0,"en":"<span class=\"num\">05</span> What Becomes Unavailable If This Course Is Failed?"},{"selector":"#blast .lede","index":0,"en":"Use this section after grades are released to see how an F may affect future study. The right-hand column includes the full chain of consequences; bold course codes are blocked directly."},{"selector":"#blast .callout","index":0,"en":"<strong>Important:</strong> The most influential upstream courses are <span class=\"pill\">CHM103</span> and <span class=\"pill\">PHY103</span> in Semester 1, and <span class=\"pill\">CHE103</span> in Semester 2. These courses feed into large parts of the curriculum, so failing them may cause multi-year delays. Prioritize them appropriately when planning your study time."},{"selector":"#check h2","index":0,"en":"<span class=\"num\">06</span> Six Checks Before Confirming Registration"},{"selector":"#check li","index":0,"en":"Are all courses failed last semester <strong>included in this semester’s registration</strong>?"},{"selector":"#check li","index":1,"en":"For every new course, have <strong>all prerequisite modules been passed</strong>? Check module by module, not only by course title."},{"selector":"#check li","index":2,"en":"When registering for a module marked <strong>Co.</strong>, have you also included its linked Module 1 in the same registration?"},{"selector":"#check li","index":3,"en":"Are you registering for PHY191 or PHY192 without the required linked theory course?"},{"selector":"#check li","index":4,"en":"Is the total credit load within the university regulations?"},{"selector":"#check li","index":5,"en":"Will a postponed course conflict with compulsory courses next semester and cause the credit load to exceed the limit?"},{"selector":"footer","index":0,"en":"Prepared from the revised B.E. 2568 Chemical Engineering curriculum map, KMUTT (academic approval: 26 March B.E. 2569). Applicable to student ID 68 from Semester 2/B.E. 2568 onward.<br>This is a simplified guide for understanding the study plan. If any information conflicts with the official curriculum or university regulations, follow the official documents and consult your academic advisor before registration."}];
+const STATIC_NODES=STATIC_TRANSLATIONS.map(item=>{
+ const el=document.querySelectorAll(item.selector)[item.index];
+ return el?{el,en:item.en,th:el.innerHTML}:null;
+}).filter(Boolean);
+
+const grid=document.getElementById('grid');
+const panel=document.getElementById('panel');
+
+function renderGrid(){
+ grid.innerHTML='';
+ T.forEach((t,ti)=>{
+  const col=document.createElement('div');col.className='col';
+  col.innerHTML='<h4>'+termName(t,ti)+'</h4><span class="cr">'+t.cr+'</span>';
   t.c.forEach(c=>{
-    const b=document.createElement('button');
-    b.className='chip'+(c.g?' gen':''); b.dataset.k=c.k;
-    b.innerHTML='<span class="c">'+nice(c.k)+'</span><span class="n">'+c.t+'</span>';
-    b.onclick=function(){SEL=(SEL===c.k?null:c.k);paint();};
-    col.appendChild(b);
+   const b=document.createElement('button');
+   b.className='chip'+(c.g?' gen':'');b.dataset.k=c.k;
+   b.innerHTML='<span class="c">'+nice(c.k)+'</span><span class="n">'+courseText(c)+'</span>';
+   b.onclick=function(){SEL=(SEL===c.k?null:c.k);paint();};
+   col.appendChild(b);
   });
   grid.appendChild(col);
-});
+ });
+}
 
 function paint(){
-  const chips=[].slice.call(document.querySelectorAll('.chip'));
-  chips.forEach(x=>x.className='chip'+(M[x.dataset.k].g?' gen':''));
-  if(!SEL){
-    panel.innerHTML='<p class="empty">แตะวิชาใดวิชาหนึ่งในผังด้านบน เพื่อดูเงื่อนไขและสายวิชาที่เกี่ยวข้อง</p>';
-    return;
-  }
-  const c=M[SEL];
-  let up,down,co;
-  if(FAILMODE){ up=new Set(); down=blast(SEL); co=new Set(); }
-  else{ up=new Set(c.p); co=new Set(c.o);
-        down=new Set([].concat(childrenPre[SEL]||[],childrenCo[SEL]||[])); }
-  chips.forEach(x=>{
-    const k=x.dataset.k;
-    if(k===SEL) x.classList.add('sel');
-    else if(up.has(k)) x.classList.add('up');
-    else if(co.has(k)) x.classList.add('coq');
-    else if(down.has(k)) x.classList.add('down');
-    else x.classList.add('dim');
-  });
-  const pills=set=>set.size
-    ? [...set].sort((a,b)=>TERMOF[a]-TERMOF[b])
-        .map(k=>'<span class="pill" onclick="jump(\''+k+'\')">'+nice(k)+'</span>').join('')
-    : '<span class="empty">— ไม่มี —</span>';
-  panel.innerHTML=
-   '<h4>'+nice(c.k)+' · '+c.t+'</h4>'+
-   '<div class="sub">'+T[TERMOF[SEL]].n+' · '+T[TERMOF[SEL]].s+' · '+c.u+'</div>'+
-   (FAILMODE
-    ? '<div class="row"><div class="lbl">ถ้าติด F ตัวนี้</div><div class="val">'+
-      (down.size?'จะลงอีก <strong style="margin:0 4px">'+down.size+'</strong> วิชาไม่ได้ จนกว่าจะซ่อมผ่าน'
-                :'<span class="empty">ไม่กระทบวิชาอื่น</span>')+
-      '</div></div><div class="row"><div class="lbl">วิชาที่โดนบล็อก</div><div class="val">'+pills(down)+'</div></div>'
-    : '<div class="row"><div class="lbl">ต้องผ่านก่อน</div><div class="val">'+pills(up)+'</div></div>'+
-      '<div class="row"><div class="lbl">ต้องลงพร้อมกัน</div><div class="val">'+pills(co)+'</div></div>'+
-      '<div class="row"><div class="lbl">ปลดล็อกวิชาต่อ</div><div class="val">'+pills(down)+'</div></div>');
+ const chips=[...document.querySelectorAll('.chip')];
+ chips.forEach(x=>x.className='chip'+(M[x.dataset.k].g?' gen':''));
+ if(!SEL){panel.innerHTML='<p class="empty">'+tr('emptyMap')+'</p>';return;}
+ const c=M[SEL];let up,down,co;
+ if(FAILMODE){up=new Set();down=blast(SEL);co=new Set();}
+ else{up=new Set(c.p);co=new Set(c.o);down=new Set([].concat(childrenPre[SEL]||[],childrenCo[SEL]||[]));}
+ chips.forEach(x=>{
+  const k=x.dataset.k;
+  if(k===SEL)x.classList.add('sel');
+  else if(up.has(k))x.classList.add('up');
+  else if(co.has(k))x.classList.add('coq');
+  else if(down.has(k))x.classList.add('down');
+  else x.classList.add('dim');
+ });
+ const pills=set=>set.size?[...set].sort((a,b)=>TERMOF[a]-TERMOF[b])
+  .map(k=>'<span class="pill" onclick="jump(\''+k+'\')">'+nice(k)+'</span>').join('')
+  :'<span class="empty">'+tr('none')+'</span>';
+ const ti=TERMOF[SEL];
+ panel.innerHTML='<h4>'+nice(c.k)+' · '+courseText(c)+'</h4>'+ 
+  '<div class="sub">'+termName(T[ti],ti)+' · '+termSub(T[ti],ti)+' · '+unitText(c)+'</div>'+ 
+  (FAILMODE?
+   '<div class="row"><div class="lbl">'+tr('failThis')+'</div><div class="val">'+
+   (down.size?tr('blockedSummary')(down.size):'<span class="empty">'+tr('noImpact')+'</span>')+
+   '</div></div><div class="row"><div class="lbl">'+tr('blockedCourses')+'</div><div class="val">'+pills(down)+'</div></div>':
+   '<div class="row"><div class="lbl">'+tr('prereq')+'</div><div class="val">'+pills(up)+'</div></div>'+ 
+   '<div class="row"><div class="lbl">'+tr('coreq')+'</div><div class="val">'+pills(co)+'</div></div>'+ 
+   '<div class="row"><div class="lbl">'+tr('unlocks')+'</div><div class="val">'+pills(down)+'</div></div>');
 }
-function jump(k){SEL=k;paint();document.getElementById('map').scrollIntoView({block:'start'});}
-document.getElementById('modeBtn').onclick=function(){
-  FAILMODE=!FAILMODE;
-  this.textContent=FAILMODE?'โหมด: ถ้าตกวิชานี้':'โหมด: ดูสายวิชา';
-  this.classList.toggle('on',FAILMODE); paint();
-};
-document.getElementById('clearBtn').onclick=function(){SEL=null;paint();};
-paint();
 
-document.getElementById('termTables').innerHTML=T.map(t=>
- '<div class="termhead"><h3>'+t.n+' — '+t.s+'</h3><span class="cr">'+t.cr+'</span></div>'+
- '<table><tr><th style="width:120px">วิชา</th><th style="width:140px">หน่วยกิต</th>'+
- '<th style="width:250px">ต้องผ่านก่อน</th><th>ลงพร้อม / ชื่อวิชา</th></tr>'+
- t.c.map(c=>'<tr><td class="c">'+nice(c.k)+'</td><td class="c">'+c.u+'</td>'+
-   '<td class="w">'+(c.p.length?c.p.map(nice).join(' · '):'<span class="none">—</span>')+'</td>'+
-   '<td class="w">'+(c.o.length?c.o.map(nice).join(' · '):'<span class="none">'+c.t+'</span>')+'</td></tr>').join('')+
- '</table>').join('');
+function jump(k){SEL=k;paint();document.getElementById('map').scrollIntoView({block:'start'});}
+
+function renderTerms(){
+ document.getElementById('termTables').innerHTML=T.map((t,ti)=>
+  '<div class="termhead"><h3>'+termName(t,ti)+' — '+termSub(t,ti)+'</h3><span class="cr">'+t.cr+'</span></div>'+ 
+  '<table><tr><th style="width:120px">'+tr('course')+'</th><th style="width:140px">'+tr('credits')+'</th>'+ 
+  '<th style="width:250px">'+tr('prereqHeader')+'</th><th>'+tr('coreqName')+'</th></tr>'+ 
+  t.c.map(c=>'<tr><td class="c">'+nice(c.k)+'</td><td class="c">'+unitText(c)+'</td>'+ 
+   '<td class="w">'+(c.p.length?c.p.map(nice).join(' · '):'<span class="none">—</span>')+'</td>'+ 
+   '<td class="w">'+(c.o.length?c.o.map(nice).join(' · '):'<span class="none">'+courseText(c)+'</span>')+'</td></tr>').join('')+
+  '</table>').join('');
+}
 
 const roots=Object.keys(M).filter(k=>blast(k).size>0)
-  .sort((a,b)=>TERMOF[a]-TERMOF[b]||a.localeCompare(b));
-document.getElementById('blastTable').innerHTML=
- '<table><tr><th style="width:170px">ถ้าติด F วิชานี้</th><th>จะลงวิชาเหล่านี้ไม่ได้</th></tr>'+
- roots.map(k=>{
-   const all=blast(k);
-   const direct=new Set(childrenPre[k]||[]);
+ .sort((a,b)=>TERMOF[a]-TERMOF[b]||a.localeCompare(b));
+function renderBlast(){
+ document.getElementById('blastTable').innerHTML=
+  '<table><tr><th style="width:190px">'+tr('blastFail')+'</th><th>'+tr('blastBlocked')+'</th></tr>'+ 
+  roots.map(k=>{
+   const all=blast(k);const direct=new Set(childrenPre[k]||[]);
    const list=[...all].sort((a,b)=>TERMOF[a]-TERMOF[b])
-     .map(x=>direct.has(x)?'<strong>'+nice(x)+'</strong>':nice(x)).join(' · ');
+    .map(x=>direct.has(x)?'<strong>'+nice(x)+'</strong>':nice(x)).join(' · ');
    return '<tr><td class="c">'+nice(k)+'</td><td class="w">'+list+'</td></tr>';
- }).join('')+'</table>';
+  }).join('')+'</table>';
+}
+
+function updateControls(){
+ document.getElementById('modeBtn').textContent=FAILMODE?tr('modeFail'):tr('modePath');
+ document.getElementById('modeBtn').classList.toggle('on',FAILMODE);
+ document.getElementById('clearBtn').textContent=tr('clear');
+}
+
+function setLanguage(lang){
+ LANG=lang;saveLang(lang);
+ document.documentElement.lang=lang;document.title=tr('title');
+ STATIC_NODES.forEach(x=>x.el.innerHTML=lang==='en'?x.en:x.th);
+ document.getElementById('langTh').classList.toggle('active',lang==='th');
+ document.getElementById('langEn').classList.toggle('active',lang==='en');
+ document.getElementById('langTh').setAttribute('aria-pressed',String(lang==='th'));
+ document.getElementById('langEn').setAttribute('aria-pressed',String(lang==='en'));
+ renderGrid();renderTerms();renderBlast();updateControls();paint();
+}
+
+document.getElementById('modeBtn').onclick=function(){FAILMODE=!FAILMODE;updateControls();paint();};
+document.getElementById('clearBtn').onclick=function(){SEL=null;paint();};
+document.getElementById('langTh').onclick=()=>setLanguage('th');
+document.getElementById('langEn').onclick=()=>setLanguage('en');
+setLanguage(LANG);
+
+
 </script>
 </body>
 </html>
