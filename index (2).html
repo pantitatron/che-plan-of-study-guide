@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>คู่มือแผนการเรียน วิศวกรรมเคมี มจธ. (หลักสูตร 2568)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E2029; --ink-2:#3C555E; --ink-3:#7C918F;
+  --paper:#F0F4F2; --card:#FFFFFF;
+  --teal:#0C7B69; --teal-pale:#DCEEEA; --teal-deep:#08503F;
+  --brick:#B23C25; --brick-pale:#FAE3DC;
+  --amber:#9E6D05; --amber-pale:#FBEFD2;
+  --green:#1E7D45; --green-pale:#DCF0E2;
+  --blue:#2D5F91; --blue-pale:#DEE9F3;
+  --line:#C9D6D2; --line-soft:#E4EBE8;
+  --r:8px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Sarabun",system-ui,sans-serif;font-size:16.5px;line-height:1.78;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+code,.mono{font-family:"IBM Plex Mono",monospace}
+h1,h2,h3,h4,.disp{font-family:"IBM Plex Sans Thai",sans-serif;line-height:1.34}
+
+header.top{background:var(--ink);color:#E8F0ED;padding:52px 0 46px;border-bottom:6px solid var(--teal)}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:#6FB6A7;margin:0 0 16px}
+header.top h1{font-size:36px;font-weight:700;margin:0 0 14px;letter-spacing:-.015em}
+header.top p{margin:0;color:#A2B9B4;max-width:60ch;font-size:15.5px}
+
+nav.bar{position:sticky;top:0;z-index:50;background:rgba(240,244,242,.93);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.bar .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.bar .wrap::-webkit-scrollbar{display:none}
+nav.bar a{flex:none;padding:14px 12px;font-size:14px;color:var(--ink-2);text-decoration:none;
+  border-bottom:2px solid transparent;font-family:"IBM Plex Sans Thai";font-weight:500;white-space:nowrap}
+nav.bar a:hover{color:var(--teal-deep);border-bottom-color:var(--teal)}
+
+section{padding:56px 0 8px}
+h2{font-size:26px;font-weight:700;margin:0 0 8px;display:flex;align-items:baseline;gap:13px}
+h2 .num{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;color:var(--teal);
+  border:1px solid var(--teal);border-radius:3px;padding:3px 7px;flex:none;position:relative;top:-5px}
+.lede{color:var(--ink-2);margin:0 0 26px;max-width:64ch}
+h3{font-size:18.5px;font-weight:600;margin:36px 0 10px}
+
+.rules{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(265px,1fr))}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px 22px 22px;border-left:5px solid var(--teal)}
+.rule.co{border-left-color:var(--green)} .rule.mod{border-left-color:var(--blue)}
+.rule.fail{border-left-color:var(--brick)}
+.rule .tag{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:7px}
+.rule strong{display:block;font-family:"IBM Plex Sans Thai";font-size:17.5px;margin-bottom:7px}
+.rule p{margin:0;font-size:15px;color:var(--ink-2);line-height:1.7}
+
+.pill{font-family:"IBM Plex Mono",monospace;font-size:.87em;font-weight:500;
+  background:var(--teal-pale);color:var(--teal-deep);padding:1px 6px;border-radius:3px;white-space:nowrap}
+.pill.no{background:var(--brick-pale);color:#8A2C17}
+.pill.co{background:var(--green-pale);color:#0F4D2A}
+
+.ex{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;margin:18px 0}
+.ex .head{background:#F6FAF9;border-bottom:1px solid var(--line-soft);padding:13px 22px;
+  font-family:"IBM Plex Sans Thai";font-weight:600;font-size:15.5px}
+.ex .body{padding:18px 22px}
+.ex ul{margin:0;padding-left:22px}
+.ex li{margin-bottom:8px} .ex li:last-child{margin-bottom:0}
+.yes::marker{content:"✓  ";color:var(--teal);font-weight:700}
+.no::marker{content:"✕  ";color:var(--brick);font-weight:700}
+.warn::marker{content:"!  ";color:var(--amber);font-weight:700}
+.plain{list-style:none;margin-left:-22px;color:var(--ink-2)}
+
+.callout{background:var(--amber-pale);border-left:5px solid var(--amber);
+  padding:16px 20px;border-radius:0 var(--r) var(--r) 0;margin:20px 0;font-size:15.5px}
+.callout strong{font-family:"IBM Plex Sans Thai"}
+
+.mapctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.btn{font-family:"IBM Plex Sans Thai";font-size:14px;font-weight:500;padding:8px 15px;
+  border:1px solid var(--line);background:var(--card);color:var(--ink-2);
+  border-radius:99px;cursor:pointer;transition:.15s}
+.btn:hover{border-color:var(--teal);color:var(--teal-deep)}
+.btn.on{background:var(--brick);border-color:var(--brick);color:#fff}
+.btn.on:hover{color:#fff}
+.hint{font-size:14px;color:var(--ink-3)}
+
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 14px;font-size:13.5px;color:var(--ink-2)}
+.legend span{display:flex;align-items:center;gap:7px}
+.sw{width:13px;height:13px;border-radius:3px;flex:none;border:1px solid rgba(0,0,0,.12)}
+
+.mapbox{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow-x:auto;padding:18px 4px 20px}
+.grid{display:flex;gap:6px;min-width:1120px}
+.col{flex:1;min-width:120px;padding:0 4px}
+.col h4{margin:0 0 3px;font-size:13.5px;font-weight:600;text-align:center}
+.col .cr{display:block;text-align:center;font-family:"IBM Plex Mono",monospace;
+  font-size:10.5px;color:var(--ink-3);margin-bottom:10px}
+.chip{display:block;width:100%;text-align:left;background:#F8FAF9;border:1px solid var(--line-soft);
+  border-left:3px solid var(--line);border-radius:5px;padding:6px 8px;margin-bottom:5px;
+  cursor:pointer;transition:.13s;font-family:inherit}
+.chip .c{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;
+  color:var(--ink);display:block;letter-spacing:-.01em}
+.chip .n{font-size:10.5px;color:var(--ink-3);display:block;line-height:1.35;margin-top:1px}
+.chip:hover{border-color:var(--teal);background:#fff}
+.chip.sel{background:var(--ink);border-color:var(--ink);border-left-color:var(--teal)}
+.chip.sel .c{color:#fff} .chip.sel .n{color:#8FA9A3}
+.chip.up{background:var(--brick-pale);border-left-color:var(--brick)}
+.chip.down{background:var(--blue-pale);border-left-color:var(--blue)}
+.chip.coq{background:var(--green-pale);border-left-color:var(--green)}
+.chip.dim{opacity:.26}
+.chip.gen{border-left-style:dotted}
+
+.panel{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--ink);
+  border-radius:var(--r);padding:20px 22px;margin-top:16px;min-height:96px}
+.panel h4{margin:0 0 3px;font-size:19px}
+.panel .sub{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-3);margin-bottom:14px}
+.panel .row{display:flex;gap:12px;padding:9px 0;border-top:1px solid var(--line-soft);
+  flex-wrap:wrap;align-items:baseline}
+.panel .row:first-of-type{border-top:0}
+.panel .lbl{flex:none;width:132px;font-size:13.5px;font-weight:600;font-family:"IBM Plex Sans Thai"}
+.panel .val{flex:1;min-width:200px;font-size:14px;display:flex;flex-wrap:wrap;gap:5px}
+.panel .val .pill{cursor:pointer}
+.empty{color:var(--ink-3);font-size:14px}
+
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:14.5px;
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+th{background:var(--ink);color:#DAE7E3;text-align:left;padding:12px 14px;
+  font-family:"IBM Plex Sans Thai";font-weight:600;font-size:13px}
+td{padding:10px 14px;border-top:1px solid var(--line-soft);vertical-align:top}
+tr:nth-child(even) td{background:#FAFCFB}
+td.c{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+td.w{white-space:normal;font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.65}
+.termhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  margin:36px 0 11px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.termhead h3{margin:0;font-size:18.5px}
+.termhead .cr{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-2)}
+.none{color:#9AACA8}
+
+ol.check{counter-reset:c;list-style:none;padding:0;margin:0}
+ol.check li{counter-increment:c;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:15px 20px 15px 56px;position:relative;margin-bottom:11px}
+ol.check li::before{content:counter(c);position:absolute;left:20px;top:15px;
+  font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--teal)}
+
+footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
+  color:var(--ink-2);font-size:13.5px}
+
+
+.lang-switch{margin-left:auto;display:flex;align-items:center;gap:3px;padding:4px;
+  background:var(--card);border:1px solid var(--line);border-radius:99px;flex:none}
+.lang-btn{border:0;background:transparent;color:var(--ink-2);font-family:"IBM Plex Sans Thai",sans-serif;
+  font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:99px;cursor:pointer;line-height:1.2}
+.lang-btn:hover{color:var(--teal-deep)}
+.lang-btn.active{background:var(--teal);color:#fff}
+@media print{.lang-switch{display:none}}
+@media (max-width:620px){
+  .lang-switch{position:sticky;right:0;box-shadow:-10px 0 14px var(--paper)}
+  .lang-btn{padding:5px 8px}
+}
+
+@media print{
+  body{background:#fff;font-size:11.5pt} nav.bar,.mapctl,.mapbox,.panel,.legend{display:none}
+  header.top{background:#fff;color:#000;border-bottom:3px solid #000}
+  header.top h1,header.top p,.eyebrow{color:#000}
+  section{break-inside:avoid;padding-top:26px} th{background:#e6e6e6;color:#000}
+}
+@media (max-width:620px){
+  header.top h1{font-size:27px} h2{font-size:22px}
+  body{font-size:15.5px} td,th{padding:9px 10px;font-size:13px}
+  .panel .lbl{width:100%}
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <p class="eyebrow">Plan of Study · Chemical Engineering · KMUTT</p>
+  <h1>อ่านแผนการเรียนให้เป็น<br>ก่อนกดลงทะเบียน</h1>
+  <p>คู่มือแปลผังหลักสูตรวิศวกรรมเคมี ฉบับปรับปรุง 2568 (สำหรับรหัส 68 มีผลตั้งแต่ภาค 2/2568) ให้เข้าใจง่าย — อ่าน 10 นาที ประหยัดเวลาซ่อมวิชาได้เป็นเทอม</p>
+</div></header>
+
+<nav class="bar"><div class="wrap">
+  <a href="#rules">กฎ 4 ข้อ</a>
+  <a href="#mistakes">จุดที่พลาดบ่อย</a>
+  <a href="#map">แผนที่วิชา</a>
+  <a href="#terms">ตาราง 8 เทอม</a>
+  <a href="#blast">ถ้าตกวิชานี้</a>
+  <a href="#check">เช็กลิสต์</a>
+  <div class="lang-switch" role="group" aria-label="Language selection">
+    <button type="button" class="lang-btn active" id="langTh" aria-pressed="true">ไทย</button>
+    <button type="button" class="lang-btn" id="langEn" aria-pressed="false">EN</button>
+  </div>
+</div></nav>
+
+<div class="wrap">
+
+<section id="rules">
+  <h2><span class="num">01</span> กฎมีแค่ 4 ข้อ</h2>
+  <p class="lede">ผังหลักสูตรที่ดูรกๆ นั้น เข้ารหัสด้วยกฎเพียง 4 แบบเท่านั้น จำได้ครบก็อ่านผังออกทั้งแผ่น</p>
+  <div class="rules">
+    <div class="rule"><span class="tag">Prerequisite</span><strong>ต้องผ่านมาก่อน</strong>
+      <p>วงเล็บใต้ชื่อวิชาที่<em>ไม่มี</em>คำว่า Co. เช่น <span class="pill">CHE210 (CHM10301-3)</span> — ต้องผ่าน CHM103 ครบทั้ง 3 โมดูลมาแล้วในเทอมก่อนหน้า ถึงจะลง CHE210 ได้</p></div>
+    <div class="rule co"><span class="tag">Corequisite</span><strong>ต้องลงพร้อมกัน</strong>
+      <p>วงเล็บที่มีคำว่า <strong>Co.</strong> เช่น <span class="pill co">PHY10302 (Co.10301)</span> — เทอมไหนที่ลง PHY10302 ต้องลง PHY10301 ในเทอมเดียวกัน</p></div>
+    <div class="rule mod"><span class="tag">Module</span><strong>วิชาที่แตกเป็นโมดูล</strong>
+      <p>เลขท้าย 2 หลักคือหมายเลขโมดูล เช่น MTH10101 = MTH101 โมดูล 1 · <span class="pill">CHM10301-3</span> ย่อมาจากโมดูล 1, 2 และ 3 รวมกัน</p></div>
+    <div class="rule fail"><span class="tag">Passing</span><strong>ผ่าน = ไม่ติด F</strong>
+      <p>เกรดอะไรก็ได้ที่ไม่ใช่ F ถือว่าผ่านและปลดล็อกวิชาต่อได้ ส่วนวิชาที่ติด F ต้องลงซ้ำในเทอมถัดไปที่เปิดสอน</p></div>
+  </div>
+</section>
+
+<section id="mistakes">
+  <h2><span class="num">02</span> จุดที่พลาดกันบ่อยที่สุด</h2>
+  <p class="lede">จากกฎ 4 ข้อข้างบน มี 2 จุดที่นักศึกษาลงทะเบียนผิดซ้ำๆ ทุกปี อ่านสองหัวข้อนี้ให้ละเอียดหน่อย</p>
+
+  <h3>ก. โมดูลตรวจแยกตัว ไม่ตรวจเป็นชุด</h3>
+  <table>
+    <tr><th style="width:135px">โมดูล</th><th style="width:195px">ต้องผ่านอะไรมาก่อน</th><th>แปลว่า</th></tr>
+    <tr><td class="c">MTH10201</td><td class="c none">— ไม่มี —</td><td>ลงได้เลย ไม่ว่าจะสอบ MTH101 ผ่านหรือไม่</td></tr>
+    <tr><td class="c">MTH10202</td><td class="c">MTH10101</td><td>ผูกกับโมดูล 1 ของ MTH101 เท่านั้น</td></tr>
+    <tr><td class="c">MTH10203</td><td class="c">MTH10102</td><td>ผูกกับโมดูล 2 ของ MTH101 เท่านั้น</td></tr>
+  </table>
+
+  <div class="ex"><div class="head">กรณีที่ 1 — เทอม 1 ตก MTH101 ทั้งสองโมดูล</div><div class="body"><ul>
+    <li class="yes">เทอม 2 ลง <span class="pill">MTH10201</span> ได้ (ไม่มีเงื่อนไข)</li>
+    <li class="no">ลง <span class="pill no">MTH10202</span> และ <span class="pill no">MTH10203</span> ไม่ได้</li>
+    <li class="warn">ต้องลง <span class="pill co">MTH10101</span> + <span class="pill co">MTH10102</span> ซ่อมในเทอม 2 ด้วย หรือสามารถซ่อมเทอมอื่นได้ แต่จะจบช้า</li>
+  </ul></div></div>
+
+  <div class="ex"><div class="head">กรณีที่ 2 — เทอม 1 ผ่าน MTH10101 แต่ตก MTH10102</div><div class="body"><ul>
+    <li class="yes">เทอม 2 ลง <span class="pill">MTH10201</span> และ <span class="pill">MTH10202</span> ได้</li>
+    <li class="no">ลง <span class="pill no">MTH10203</span> ไม่ได้ เพราะยังไม่ผ่าน MTH10102</li>
+    <li class="warn">ต้องลง <span class="pill co">MTH10102</span> ซ่อมในเทอม 2 ด้วย หรือสามารถซ่อมเทอมอื่นได้ แต่จะจบช้า</li>
+  </ul></div></div>
+
+  <div class="callout"><strong>ปลายทางยังต้องครบอยู่ดี</strong> — การเก็บโมดูลค้างไว้ทำได้ในระยะสั้น แต่ <span class="pill">MTH20101</span> ต้องการ MTH10202 + MTH10203 ครบ · <span class="pill">PRE372</span> ต้องการ MTH10201 + 10202 + 10203 ครบ · <span class="pill">MTH303</span> ต้องการ MTH20101 + 20102 ครบ ยิ่งค้างนาน ยิ่งดันวิชาปีสูงถอยหลัง</div>
+
+  <h3>ข. Co. คือ "ต้องลงคู่" ไม่ใช่ "ต้องผ่านก่อน"</h3>
+
+  <div class="ex"><div class="head">กรณีที่ 3 — เทอม 1 ผ่าน PHY10301 แต่ตก PHY10302</div><div class="body"><ul>
+    <li class="yes">เทอม 2 ลง <span class="pill">PHY10302</span> ตัวเดียวได้</li>
+    <li class="plain">ไม่ต้องลง PHY10301 ซ้ำ เพราะผ่านมาแล้ว</li>
+  </ul></div></div>
+
+  <div class="ex"><div class="head">กรณีที่ 4 — เทอม 1 ผ่าน PHY10302, PHY10303 และ PHY191 แต่ไม่ผ่าน PHY10301</div><div class="body"><ul>
+    <li class="no">เทอม 2 ลง <span class="pill no">PHY10401</span>, <span class="pill no">PHY10402</span>, <span class="pill no">PHY10403</span> และ <span class="pill no">PHY192</span> ไม่ได้</li>
+    <li class="warn">ต้องไปแก้ <span class="pill co">PHY10301</span> ให้ผ่านก่อน ถึงจะลงกลุ่มนี้ได้</li>
+  </ul></div></div>
+</section>
+
+<section id="map">
+  <h2><span class="num">03</span> แผนที่วิชา — กดดูได้ว่าอะไรต่ออะไร</h2>
+  <p class="lede">กดที่วิชาไหนก็ได้ ระบบจะไล่สายให้ทันทีว่าวิชานั้น<strong>ต้องผ่านอะไรมาก่อน</strong> และ<strong>ไปปลดล็อกอะไรต่อ</strong> หรือเปิดโหมด "ถ้าตกวิชานี้" เพื่อดูว่าการติด F หนึ่งตัวลามไปกระทบวิชาไหนบ้างทั้งหลักสูตร</p>
+
+  <div class="mapctl">
+    <button class="btn" id="modeBtn">โหมด: ดูสายวิชา</button>
+    <button class="btn" id="clearBtn">ล้างการเลือก</button>
+    <span class="hint">แตะวิชาในผังด้านล่าง</span>
+  </div>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--ink)"></i>วิชาที่เลือก</span>
+    <span><i class="sw" style="background:var(--brick-pale);border-left:3px solid var(--brick)"></i>ต้องผ่านก่อน</span>
+    <span><i class="sw" style="background:var(--green-pale);border-left:3px solid var(--green)"></i>ต้องลงพร้อมกัน</span>
+    <span><i class="sw" style="background:var(--blue-pale);border-left:3px solid var(--blue)"></i>วิชาที่ปลดล็อกต่อ</span>
+  </div>
+
+  <div class="mapbox"><div class="grid" id="grid"></div></div>
+  <div class="panel" id="panel"></div>
+</section>
+
+<section id="terms">
+  <h2><span class="num">04</span> แผนการเรียนทั้ง 8 เทอม</h2>
+  <p class="lede">คอลัมน์ "ต้องผ่านก่อน" คือสิ่งที่ต้องเคลียร์มาแล้วก่อนเทอมนี้ ส่วน "ลงพร้อม" คือวิชาที่ต้องอยู่ในใบลงทะเบียนใบเดียวกัน</p>
+  <div id="termTables"></div>
+</section>
+
+<section id="blast">
+  <h2><span class="num">05</span> ถ้าตกวิชานี้ จะลงอะไรไม่ได้บ้าง</h2>
+  <p class="lede">ใช้ตอนประกาศผลสอบ ดูว่าตัวที่ติด F ไปกระทบแผนข้างหน้าแค่ไหน คอลัมน์ขวาไล่ผลกระทบต่อเนื่องให้ครบทุกทอดแล้ว — ตัวหนาคือวิชาตัวต่อของวิชานี้</p>
+  <div id="blastTable"></div>
+  <div class="callout"><strong>ต้องระวัง:</strong> <span class="pill">CHM103</span> และ <span class="pill">PHY103</span> ในเทอม 1 กับ <span class="pill">CHE103</span> ในเทอม 2 ไว้ เนื่องจากกระทบหลายวิชา</div>
+</section>
+
+<section id="check">
+  <h2><span class="num">06</span> เช็ก 6 ข้อก่อนกดยืนยันลงทะเบียน</h2>
+  <ol class="check">
+    <li>วิชาที่ติด F เทอมที่แล้ว <strong>อยู่ในใบลงทะเบียนเทอมนี้ครบหรือยัง</strong></li>
+    <li>วิชาใหม่ทุกตัว <strong>เคลียร์เงื่อนไข "ต้องผ่านก่อน" ครบทุกโมดูลแล้วหรือยัง</strong> — เช็กทีละโมดูล ไม่ใช่เช็กทั้งวิชา</li>
+    <li>ถ้าลงโมดูลที่มี <strong>Co.</strong> ได้ใส่โมดูล 1 ที่ผูกกันไว้ในใบเดียวกันแล้วหรือยัง</li>
+    <li>หน่วยกิตรวมอยู่ในเกณฑ์ที่ระเบียบมหาวิทยาลัยกำหนดหรือไม่</li>
+    <li>วิชาที่เลื่อนไปเทอมหน้า จะไปชนกับวิชาบังคับของเทอมนั้นจนหน่วยกิตเกินไหม</li>
+  </ol>
+</section>
+
+<footer>
+  เรียบเรียงจากผังหลักสูตรวิศวกรรมเคมี มจธ. ฉบับปรับปรุง พ.ศ. 2568 (ผ่านอนุมัติวิชาการ 26/3/2569) · ใช้กับนักศึกษารหัส 68 ตั้งแต่ภาคเรียนที่ 2/2568<br>
+  คู่มือนี้เป็นฉบับย่อเพื่อความเข้าใจ หากมีข้อขัดแย้ง ให้ยึดผังหลักสูตรและระเบียบมหาวิทยาลัยเป็นหลัก และตรวจสอบกับอาจารย์ที่ปรึกษาก่อนลงทะเบียนทุกครั้ง
+</footer>
+</div>
+
+<script>
+
+const CHM3=["CHM10301","CHM10302","CHM10303"];
+const T=[
+ {n:"เทอม 1",s:"ปี 1 · ภาค 1",cr:"18(15-7-36)",c:[
+  {k:"CHM10301",t:"Fund. Chemistry",u:"1(1-0-2)"},
+  {k:"CHM10302",t:"— โมดูล 2",u:"1(1-0-2)"},
+  {k:"CHM10303",t:"— โมดูล 3",u:"1(1-0-2)"},
+  {k:"CHM160",t:"Chemistry Lab.",u:"1(0-3-2)",p:CHM3},
+  {k:"MTH10101",t:"Math I",u:"2(2-0-4)"},
+  {k:"MTH10102",t:"— โมดูล 2",u:"1(1-0-2)"},
+  {k:"PHY10301",t:"Physics I",u:"1(1-0-2)"},
+  {k:"PHY10302",t:"— โมดูล 2",u:"1(1-0-2)",o:["PHY10301"]},
+  {k:"PHY10303",t:"— โมดูล 3",u:"1(1-0-2)",o:["PHY10301"]},
+  {k:"PHY191",t:"Gen. Physics Lab. I",u:"1(0-2-2)",o:["PHY10301"]},
+  {k:"LNG120",t:"Gen. English",u:"3(3-0-6)"},
+  {k:"GEN101",t:"Physical Education",u:"1(0-2-2)",g:1},
+  {k:"GEN111",t:"Man and Ethics",u:"3(3-0-6)",g:1}]},
+ {n:"เทอม 2",s:"ปี 1 · ภาค 2",cr:"19(17-5-36)",c:[
+  {k:"MTH10201",t:"Math II",u:"1(1-0-2)"},
+  {k:"MTH10202",t:"— โมดูล 2",u:"1(1-0-2)",p:["MTH10101"]},
+  {k:"MTH10203",t:"— โมดูล 3",u:"1(1-0-2)",p:["MTH10102"]},
+  {k:"PHY10401",t:"Physics II",u:"1(1-0-2)",p:["PHY10301"]},
+  {k:"PHY10402",t:"— โมดูล 2",u:"1(1-0-2)",o:["PHY10401"]},
+  {k:"PHY10403",t:"— โมดูล 3",u:"1(1-0-2)",o:["PHY10401"]},
+  {k:"PHY192",t:"Gen. Physics Lab. II",u:"1(0-2-2)",o:["PHY10401"]},
+  {k:"CHE10301",t:"Mat. & Ener. Bal.",u:"2(2-0-4)",p:CHM3},
+  {k:"CHE10302",t:"— โมดูล 2",u:"1(1-0-2)",p:CHM3},
+  {k:"CHE214",t:"Phys. Chem.",u:"3(3-0-6)",p:CHM3},
+  {k:"MEE119",t:"Mec. Eng. Drawing",u:"3(2-3-4)"},
+  {k:"LNG220",t:"Aca. English",u:"3(3-0-6)",p:["LNG120"]}]},
+ {n:"เทอม 3",s:"ปี 2 · ภาค 1",cr:"18(17-2-36)",c:[
+  {k:"MTH20101",t:"Math III (1 นก.)",u:"1(1-0-2)",p:["MTH10202","MTH10203"]},
+  {k:"MTH20102",t:"Math III (2 นก.)",u:"2(2-0-4)",p:["MTH10101","MTH10102"]},
+  {k:"CHE210",t:"Org. Chem.",u:"3(3-0-6)",p:CHM3},
+  {k:"CHE24101",t:"Thermo. I",u:"3(3-0-6)",p:["CHE10301","CHE10302"]},
+  {k:"MEE214",t:"Eng. Mechanics",u:"3(3-0-6)",p:["PHY10301","PHY10302","PHY10303"]},
+  {k:"CPE100",t:"Com. Pro. for Eng.",u:"3(2-2-6)"},
+  {k:"LNG223",t:"Engl. for Workplace",u:"3(3-0-6)",p:["LNG220"]}]},
+ {n:"เทอม 4",s:"ปี 2 · ภาค 2",cr:"19(16-8-36)",c:[
+  {k:"CHE23201",t:"Transport Phen.",u:"1(1-0-2)",p:["CHE10301","PHY10301"]},
+  {k:"CHE23202",t:"— โมดูล 2",u:"1(1-0-2)",p:["CHE10301","CHE10302","PHY10303"]},
+  {k:"CHE23203",t:"— โมดูล 3",u:"1(1-0-2)",p:["CHE10301"]},
+  {k:"CHE212",t:"Org. Chem. Lab.",u:"1(0-3-2)",p:["CHE210"]},
+  {k:"CHE242",t:"Thermo. II",u:"3(3-0-6)",p:["CHE24101"]},
+  {k:"MTH303",t:"Numer. Methods",u:"3(3-0-6)",p:["MTH20101","MTH20102"]},
+  {k:"PRE372",t:"Probability & Stat.",u:"3(3-0-6)",p:["MTH10201","MTH10202","MTH10203"]},
+  {k:"EEE102",t:"Elec. Power",u:"3(2-3-4)"},
+  {k:"GEN121",t:"Learn. & Prob. Solv.",u:"3(3-0-6)",g:1}]},
+ {n:"เทอม 5",s:"ปี 3 · ภาค 1",cr:"18(18-0-36)",c:[
+  {k:"CHE333",t:"Fluid Mech. & Equip.",u:"3(3-0-6)",p:["CHE23201"]},
+  {k:"CHE33401",t:"Heat Trans. & Equip.",u:"1(1-0-2)",p:["CHE23201","CHE23202"]},
+  {k:"CHE33402",t:"— โมดูล 2",u:"1(1-0-2)",p:["CHE23201","CHE23202"]},
+  {k:"CHE33403",t:"— โมดูล 3",u:"1(1-0-2)",p:["CHE23201","CHE23202","CHE23203"]},
+  {k:"CHE343",t:"Kine. & Reactor Des.",u:"3(3-0-6)",p:["CHE242"]},
+  {k:"CHE471",t:"Eng. Mat. & Selection",u:"3(3-0-6)",p:CHM3},
+  {k:"GEN231",t:"Miracle of Thinking",u:"3(3-0-6)",g:1},
+  {k:"GEN351",t:"Modern Management",u:"3(3-0-6)",g:1}]},
+ {n:"เทอม 6",s:"ปี 3 · ภาค 2",cr:"17(16-3-34)",c:[
+  {k:"CHE335",t:"Mass Trans. & Equip.",u:"3(3-0-6)",p:["CHE242","CHE23201","CHE23202","CHE23203"]},
+  {k:"CHE451",t:"Process Equip. Des.",u:"3(3-0-6)",p:["MEE214","CHE471"]},
+  {k:"CHE461",t:"Process Dyn. & Control",u:"3(3-0-6)",p:["MTH20101","MTH20102","CHE333","CHE343"]},
+  {k:"CHE481",t:"Chem. Eng. Lab. I",u:"2(1-3-4)",p:["CHE333","CHE33401","CHE33402","CHE33403"]},
+  {k:"PRE380",t:"Eng. Economics",u:"3(3-0-6)"},
+  {k:"GEN xxx",t:"วิชาเลือก GEN I",u:"3(3-0-6)",g:1}]},
+ {n:"ภาคฤดูร้อน",s:"หลังปี 3",cr:"2(S/U)",c:[
+  {k:"CHE300",t:"Industrial Training",u:"2(S/U)"}]},
+ {n:"เทอม 7",s:"ปี 4 · ภาค 1",cr:"17(13-9-40)",c:[
+  {k:"CHE452",t:"Chem. Eng. Plant Des.",u:"3(3-0-6)",p:["CHE333","CHE343","CHE335","CHE33401","CHE33402","CHE33403"]},
+  {k:"CHE472",t:"Environment",u:"3(3-0-6)"},
+  {k:"CHE473",t:"Chemical Plant Safety",u:"3(3-0-6)"},
+  {k:"CHE482",t:"Chem. Eng. Lab. II",u:"2(1-3-4)",p:["CHE343","CHE335","CHE33401","CHE33402","CHE33403"]},
+  {k:"CHE483",t:"Seminar",u:"1(0-2-3)"},
+  {k:"CHE484",t:"Chem. Eng. Project I",u:"2(0-4-6)"},
+  {k:"CHE xxx",t:"วิชาเลือก ChE I",u:"3(3-0-9)",g:1}]},
+ {n:"เทอม 8",s:"ปี 4 · ภาค 2",cr:"19(15-8-45)",c:[
+  {k:"CHE454",t:"Chem. Eng. Des. Project",u:"3(0-6-9)",p:["PRE380","CHE452","CHE472","CHE473","CHE461"]},
+  {k:"CHE485",t:"Chem. Eng. Project II",u:"1(0-2-3)",p:["CHE484"]},
+  {k:"CHE xxx.",t:"วิชาเลือก ChE II",u:"3(3-0-9)",g:1},
+  {k:"GEN241",t:"Beauty of Life",u:"3(3-0-6)",g:1},
+  {k:"GEN xxx.",t:"วิชาเลือก GEN II",u:"3(3-0-6)",g:1},
+  {k:"XXX xxx",t:"วิชาเลือกเสรี I",u:"3(3-0-6)",g:1},
+  {k:"XXX xxx.",t:"วิชาเลือกเสรี II",u:"3(3-0-6)",g:1}]}
+];
+
+const UI={
+ th:{
+  title:"คู่มือแผนการเรียน วิศวกรรมเคมี มจธ. (หลักสูตร 2568)",
+  modePath:"โหมด: ดูสายวิชา",modeFail:"โหมด: ถ้าตกวิชานี้",clear:"ล้างการเลือก",
+  emptyMap:"แตะวิชาใดวิชาหนึ่งในผังด้านบน เพื่อดูเงื่อนไขและสายวิชาที่เกี่ยวข้อง",
+  none:"— ไม่มี —",failThis:"ถ้าติด F ตัวนี้",blockedSummary:n=>`จะลงอีก <strong style="margin:0 4px">${n}</strong> วิชาไม่ได้ จนกว่าจะซ่อมผ่าน`,
+  noImpact:"ไม่กระทบวิชาอื่น",blockedCourses:"วิชาที่โดนบล็อก",prereq:"ต้องผ่านก่อน",
+  coreq:"ต้องลงพร้อมกัน",unlocks:"ปลดล็อกวิชาต่อ",course:"วิชา",credits:"หน่วยกิต",
+  prereqHeader:"ต้องผ่านก่อน",coreqName:"ลงพร้อม",blastFail:"ถ้าติด F วิชานี้",
+  blastBlocked:"จะลงวิชาเหล่านี้ไม่ได้"
+ },
+ en:{
+  title:"KMUTT Chemical Engineering Study Plan Guide (B.E. 2568 Curriculum)",
+  modePath:"Mode: Course pathway",modeFail:"Mode: If this course is failed",clear:"Clear selection",
+  emptyMap:"Select a course in the map above to view its requirements and related course pathway.",
+  none:"— None —",failThis:"If this course is failed",blockedSummary:n=>`You will be unable to register for <strong style="margin:0 4px">${n}</strong> additional course(s) until the failed course is passed.`,
+  noImpact:"No other course is affected",blockedCourses:"Blocked courses",prereq:"Prerequisites",
+  coreq:"Corequisites",unlocks:"Courses unlocked",course:"Course",credits:"Credits",
+  prereqHeader:"Prerequisite",coreqName:"Corequisite",blastFail:"If this course is failed",
+  blastBlocked:"These courses become unavailable"
+ }
+};
+
+const TERM_EN=[
+ {n:"Semester 1",s:"Year 1 · Semester 1"},{n:"Semester 2",s:"Year 1 · Semester 2"},
+ {n:"Semester 3",s:"Year 2 · Semester 1"},{n:"Semester 4",s:"Year 2 · Semester 2"},
+ {n:"Semester 5",s:"Year 3 · Semester 1"},{n:"Semester 6",s:"Year 3 · Semester 2"},
+ {n:"Summer Term",s:"After Year 3"},{n:"Semester 7",s:"Year 4 · Semester 1"},
+ {n:"Semester 8",s:"Year 4 · Semester 2"}
+];
+
+const COURSE_EN={
+ "— โมดูล 2":"— Module 2","— โมดูล 3":"— Module 3",
+ "Math III (1 นก.)":"Math III (1 credit)","Math III (2 นก.)":"Math III (2 credits)",
+ "วิชาเลือก GEN I":"General Education Elective I","วิชาเลือก GEN II":"General Education Elective II",
+ "วิชาเลือก ChE I":"Chemical Engineering Elective I","วิชาเลือก ChE II":"Chemical Engineering Elective II",
+ "วิชาเลือกเสรี I":"Free Elective I","วิชาเลือกเสรี II":"Free Elective II"
+};
+
+function loadSavedLang(){try{return localStorage.getItem('cheGuideLang')==='en'?'en':'th';}catch(e){return 'th';}}
+function saveLang(lang){try{localStorage.setItem('cheGuideLang',lang);}catch(e){}}
+let LANG=loadSavedLang();
+let SEL=null,FAILMODE=false;
+const M={},TERMOF={};
+T.forEach((t,ti)=>t.c.forEach(c=>{c.p=c.p||[];c.o=c.o||[];M[c.k]=c;TERMOF[c.k]=ti}));
+const childrenPre={},childrenCo={};
+Object.values(M).forEach(c=>{
+ c.p.forEach(k=>(childrenPre[k]=childrenPre[k]||[]).push(c.k));
+ c.o.forEach(k=>(childrenCo[k]=childrenCo[k]||[]).push(c.k));
+});
+const nice=k=>k.replace(/\.$/,'');
+const tr=k=>UI[LANG][k];
+const termName=(t,i)=>LANG==='en'?TERM_EN[i].n:t.n;
+const termSub=(t,i)=>LANG==='en'?TERM_EN[i].s:t.s;
+const courseText=c=>LANG==='en'?(COURSE_EN[c.t]||c.t):c.t;
+const unitText=c=>LANG==='en'&&c.u.startsWith('รวมใน ')?'Included in '+c.u.slice(6):c.u;
+
+function blast(k){
+ const blocked=new Set();let grew=true;
+ while(grew){grew=false;Object.values(M).forEach(c=>{
+  if(blocked.has(c.k))return;
+  const hit=c.p.some(x=>x===k||blocked.has(x))||c.o.some(x=>blocked.has(x));
+  if(hit){blocked.add(c.k);grew=true;}
+ });}
+ return blocked;
+}
+
+const STATIC_TRANSLATIONS=[{"selector":"header.top h1","index":0,"en":"Understand Your Study Plan<br>Before You Register"},{"selector":"header.top .wrap > p","index":1,"en":"A plain-language guide to the revised B.E. 2568 Chemical Engineering curriculum for student ID 68, effective from Semester 2/B.E. 2568 — ten minutes of reading may prevent a semester-long delay."},{"selector":"nav.bar a","index":0,"en":"4 Key Rules"},{"selector":"nav.bar a","index":1,"en":"Common Mistakes"},{"selector":"nav.bar a","index":2,"en":"Course Map"},{"selector":"nav.bar a","index":3,"en":"8-Semester Plan"},{"selector":"nav.bar a","index":4,"en":"If You Fail"},{"selector":"nav.bar a","index":5,"en":"Checklist"},{"selector":"#rules h2","index":0,"en":"<span class=\"num\">01</span> Only 4 Rules to Know"},{"selector":"#rules .lede","index":0,"en":"The curriculum map may look complicated, but it is built around only four types of rules. Learn these and you can read the entire map."},{"selector":"#rules .rule strong","index":0,"en":"Must be passed beforehand"},{"selector":"#rules .rule p","index":0,"en":"Parentheses beneath a course name that do <em>not</em> contain “Co.”, such as <span class=\"pill\">CHE210 (CHM10301-3)</span>, mean that all three CHM103 modules must have been passed in an earlier semester before CHE210 can be taken."},{"selector":"#rules .rule strong","index":1,"en":"Must be taken together"},{"selector":"#rules .rule p","index":1,"en":"Parentheses containing <strong>Co.</strong>, such as <span class=\"pill co\">PHY10302 (Co.10301)</span>, mean that PHY10301 must be registered in the same semester whenever PHY10302 is taken."},{"selector":"#rules .rule strong","index":2,"en":"Courses divided into modules"},{"selector":"#rules .rule p","index":2,"en":"The last two digits identify the module. For example, MTH10101 means MTH101 Module 1. <span class=\"pill\">CHM10301-3</span> is shorthand for Modules 1, 2, and 3 together."},{"selector":"#rules .rule strong","index":3,"en":"Passed = no F grade"},{"selector":"#rules .rule p","index":3,"en":"Any grade other than F counts as a pass and unlocks subsequent courses. A failed course must be repeated in the next semester in which it is offered."},{"selector":"#mistakes h2","index":0,"en":"<span class=\"num\">02</span> The Most Common Registration Mistakes"},{"selector":"#mistakes .lede","index":0,"en":"Two misunderstandings repeatedly cause registration errors. Read these sections carefully before choosing courses."},{"selector":"#mistakes h3","index":0,"en":"A. Modules are checked individually, not as a bundle"},{"selector":"#mistakes table th","index":0,"en":"Module"},{"selector":"#mistakes table th","index":1,"en":"Prerequisite"},{"selector":"#mistakes table th","index":2,"en":"Meaning"},{"selector":"#mistakes table tr:nth-child(2) td","index":1,"en":"— None —"},{"selector":"#mistakes table tr:nth-child(2) td","index":2,"en":"May be taken immediately, whether or not MTH101 has been passed."},{"selector":"#mistakes table tr:nth-child(3) td","index":2,"en":"Linked only to MTH101 Module 1."},{"selector":"#mistakes table tr:nth-child(4) td","index":2,"en":"Linked only to MTH101 Module 2."},{"selector":"#mistakes .ex .head","index":0,"en":"Case 1 — Both MTH101 modules were failed in Semester 1"},{"selector":"#mistakes .ex li","index":0,"en":"In Semester 2, <span class=\"pill\">MTH10201</span> may still be taken because it has no prerequisite."},{"selector":"#mistakes .ex li","index":1,"en":"<span class=\"pill no\">MTH10202</span> and <span class=\"pill no\">MTH10203</span> cannot be taken."},{"selector":"#mistakes .ex li","index":2,"en":"<span class=\"pill co\">MTH10101</span> and <span class=\"pill co\">MTH10102</span> should be retaken in Semester 2 — they can be retaken in a later semester instead, but that will delay graduation."},{"selector":"#mistakes .ex .head","index":1,"en":"Case 2 — MTH10101 was passed but MTH10102 was failed in Semester 1"},{"selector":"#mistakes .ex li","index":3,"en":"In Semester 2, <span class=\"pill\">MTH10201</span> and <span class=\"pill\">MTH10202</span> may be taken."},{"selector":"#mistakes .ex li","index":4,"en":"<span class=\"pill no\">MTH10203</span> cannot be taken because MTH10102 has not yet been passed."},{"selector":"#mistakes .ex li","index":5,"en":"<span class=\"pill co\">MTH10102</span> should be retaken in Semester 2 — it can be retaken in a later semester instead, but that will delay graduation."},{"selector":"#mistakes .callout","index":0,"en":"<strong>All required modules must eventually be completed.</strong> A missing module can be carried temporarily, but <span class=\"pill\">MTH20101</span> requires both MTH10202 and MTH10203; <span class=\"pill\">PRE372</span> requires MTH10201, MTH10202, and MTH10203; and <span class=\"pill\">MTH303</span> requires MTH20101 and MTH20102. The longer a module remains incomplete, the more upper-year courses are delayed."},{"selector":"#mistakes h3","index":1,"en":"B. “Co.” means taken together, not passed beforehand"},{"selector":"#mistakes .ex .head","index":2,"en":"Case 3 — PHY10301 was passed but PHY10302 was failed in Semester 1"},{"selector":"#mistakes .ex li","index":6,"en":"In Semester 2, <span class=\"pill\">PHY10302</span> may be registered on its own."},{"selector":"#mistakes .ex li","index":7,"en":"PHY10301 does not need to be retaken, since it was already passed."},{"selector":"#mistakes .ex .head","index":3,"en":"Case 4 — PHY10302, PHY10303, and PHY191 were passed, but PHY10301 was failed, in Semester 1"},{"selector":"#mistakes .ex li","index":8,"en":"In Semester 2, <span class=\"pill no\">PHY10401</span>, <span class=\"pill no\">PHY10402</span>, <span class=\"pill no\">PHY10403</span>, and <span class=\"pill no\">PHY192</span> cannot be registered."},{"selector":"#mistakes .ex li","index":9,"en":"<span class=\"pill co\">PHY10301</span> must be passed first before any of these can be taken."},{"selector":"#map h2","index":0,"en":"<span class=\"num\">03</span> Interactive Course Map"},{"selector":"#map .lede","index":0,"en":"Select any course to see its <strong>prerequisites</strong> and the courses it <strong>unlocks</strong>. Turn on “If this course is failed” mode to see how one F grade can affect the rest of the curriculum."},{"selector":"#map .hint","index":0,"en":"Select a course in the map below"},{"selector":"#map .legend span","index":0,"en":"<i class=\"sw\" style=\"background:var(--ink)\"></i>Selected course"},{"selector":"#map .legend span","index":1,"en":"<i class=\"sw\" style=\"background:var(--brick-pale);border-left:3px solid var(--brick)\"></i>Prerequisite"},{"selector":"#map .legend span","index":2,"en":"<i class=\"sw\" style=\"background:var(--green-pale);border-left:3px solid var(--green)\"></i>Corequisite"},{"selector":"#map .legend span","index":3,"en":"<i class=\"sw\" style=\"background:var(--blue-pale);border-left:3px solid var(--blue)\"></i>Unlocked course"},{"selector":"#terms h2","index":0,"en":"<span class=\"num\">04</span> Complete 8-Semester Study Plan"},{"selector":"#terms .lede","index":0,"en":"The “Prerequisite” column lists courses that must already have been passed. The “Corequisite” column shows courses that must appear in the same registration record."},{"selector":"#blast h2","index":0,"en":"<span class=\"num\">05</span> What Becomes Unavailable If This Course Is Failed?"},{"selector":"#blast .lede","index":0,"en":"Use this section after grades are released to see how an F may affect future study. The right-hand column includes the full chain of consequences; bold course codes are the direct follow-on courses of this one."},{"selector":"#blast .callout","index":0,"en":"<strong>Caution:</strong> Pay close attention to <span class=\"pill\">CHM103</span> and <span class=\"pill\">PHY103</span> in Semester 1, and <span class=\"pill\">CHE103</span> in Semester 2, as they affect many other courses."},{"selector":"#check h2","index":0,"en":"<span class=\"num\">06</span> Six Checks Before Confirming Registration"},{"selector":"#check li","index":0,"en":"Are all courses failed last semester <strong>included in this semester’s registration</strong>?"},{"selector":"#check li","index":1,"en":"For every new course, have <strong>all prerequisite modules been passed</strong>? Check module by module, not only by course title."},{"selector":"#check li","index":2,"en":"When registering for a module marked <strong>Co.</strong>, have you also included its linked Module 1 in the same registration?"},{"selector":"#check li","index":3,"en":"Is the total credit load within the university regulations?"},{"selector":"#check li","index":4,"en":"Will a postponed course conflict with compulsory courses next semester and cause the credit load to exceed the limit?"},{"selector":"footer","index":0,"en":"Prepared from the revised B.E. 2568 Chemical Engineering curriculum map, KMUTT (academic approval: 26 March B.E. 2569). Applicable to student ID 68 from Semester 2/B.E. 2568 onward.<br>This is a simplified guide for understanding the study plan. If any information conflicts with the official curriculum or university regulations, follow the official documents and consult your academic advisor before registration."}];
+const STATIC_NODES=STATIC_TRANSLATIONS.map(item=>{
+ const el=document.querySelectorAll(item.selector)[item.index];
+ return el?{el,en:item.en,th:el.innerHTML}:null;
+}).filter(Boolean);
+
+const grid=document.getElementById('grid');
+const panel=document.getElementById('panel');
+
+function renderGrid(){
+ grid.innerHTML='';
+ T.forEach((t,ti)=>{
+  const col=document.createElement('div');col.className='col';
+  col.innerHTML='<h4>'+termName(t,ti)+'</h4><span class="cr">'+t.cr+'</span>';
+  t.c.forEach(c=>{
+   const b=document.createElement('button');
+   b.className='chip'+(c.g?' gen':'');b.dataset.k=c.k;
+   b.innerHTML='<span class="c">'+nice(c.k)+'</span><span class="n">'+courseText(c)+'</span>';
+   b.onclick=function(){SEL=(SEL===c.k?null:c.k);paint();};
+   col.appendChild(b);
+  });
+  grid.appendChild(col);
+ });
+}
+
+function paint(){
+ const chips=[...document.querySelectorAll('.chip')];
+ chips.forEach(x=>x.className='chip'+(M[x.dataset.k].g?' gen':''));
+ if(!SEL){panel.innerHTML='<p class="empty">'+tr('emptyMap')+'</p>';return;}
+ const c=M[SEL];let up,down,co;
+ if(FAILMODE){up=new Set();down=blast(SEL);co=new Set();}
+ else{up=new Set(c.p);co=new Set(c.o);down=new Set([].concat(childrenPre[SEL]||[],childrenCo[SEL]||[]));}
+ chips.forEach(x=>{
+  const k=x.dataset.k;
+  if(k===SEL)x.classList.add('sel');
+  else if(up.has(k))x.classList.add('up');
+  else if(co.has(k))x.classList.add('coq');
+  else if(down.has(k))x.classList.add('down');
+  else x.classList.add('dim');
+ });
+ const pills=set=>set.size?[...set].sort((a,b)=>TERMOF[a]-TERMOF[b])
+  .map(k=>'<span class="pill" onclick="jump(\''+k+'\')">'+nice(k)+'</span>').join('')
+  :'<span class="empty">'+tr('none')+'</span>';
+ const ti=TERMOF[SEL];
+ panel.innerHTML='<h4>'+nice(c.k)+' · '+courseText(c)+'</h4>'+ 
+  '<div class="sub">'+termName(T[ti],ti)+' · '+termSub(T[ti],ti)+' · '+unitText(c)+'</div>'+ 
+  (FAILMODE?
+   '<div class="row"><div class="lbl">'+tr('failThis')+'</div><div class="val">'+
+   (down.size?tr('blockedSummary')(down.size):'<span class="empty">'+tr('noImpact')+'</span>')+
+   '</div></div><div class="row"><div class="lbl">'+tr('blockedCourses')+'</div><div class="val">'+pills(down)+'</div></div>':
+   '<div class="row"><div class="lbl">'+tr('prereq')+'</div><div class="val">'+pills(up)+'</div></div>'+ 
+   '<div class="row"><div class="lbl">'+tr('coreq')+'</div><div class="val">'+pills(co)+'</div></div>'+ 
+   '<div class="row"><div class="lbl">'+tr('unlocks')+'</div><div class="val">'+pills(down)+'</div></div>');
+}
+
+function jump(k){SEL=k;paint();document.getElementById('map').scrollIntoView({block:'start'});}
+
+function renderTerms(){
+ document.getElementById('termTables').innerHTML=T.map((t,ti)=>
+  '<div class="termhead"><h3>'+termName(t,ti)+' — '+termSub(t,ti)+'</h3><span class="cr">'+t.cr+'</span></div>'+ 
+  '<table><tr><th style="width:120px">'+tr('course')+'</th><th style="width:140px">'+tr('credits')+'</th>'+ 
+  '<th style="width:250px">'+tr('prereqHeader')+'</th><th>'+tr('coreqName')+'</th></tr>'+ 
+  t.c.map(c=>'<tr><td class="c">'+nice(c.k)+'</td><td class="c">'+unitText(c)+'</td>'+ 
+   '<td class="w">'+(c.p.length?c.p.map(nice).join(' · '):'<span class="none">—</span>')+'</td>'+ 
+   '<td class="w">'+(c.o.length?c.o.map(nice).join(' · '):'<span class="none">—</span>')+'</td></tr>').join('')+
+  '</table>').join('');
+}
+
+const roots=Object.keys(M).filter(k=>blast(k).size>0)
+ .sort((a,b)=>TERMOF[a]-TERMOF[b]||a.localeCompare(b));
+function renderBlast(){
+ document.getElementById('blastTable').innerHTML=
+  '<table><tr><th style="width:190px">'+tr('blastFail')+'</th><th>'+tr('blastBlocked')+'</th></tr>'+ 
+  roots.map(k=>{
+   const all=blast(k);const direct=new Set(childrenPre[k]||[]);
+   const list=[...all].sort((a,b)=>TERMOF[a]-TERMOF[b])
+    .map(x=>direct.has(x)?'<strong>'+nice(x)+'</strong>':nice(x)).join(' · ');
+   return '<tr><td class="c">'+nice(k)+'</td><td class="w">'+list+'</td></tr>';
+  }).join('')+'</table>';
+}
+
+function updateControls(){
+ document.getElementById('modeBtn').textContent=FAILMODE?tr('modeFail'):tr('modePath');
+ document.getElementById('modeBtn').classList.toggle('on',FAILMODE);
+ document.getElementById('clearBtn').textContent=tr('clear');
+}
+
+function setLanguage(lang){
+ LANG=lang;saveLang(lang);
+ document.documentElement.lang=lang;document.title=tr('title');
+ STATIC_NODES.forEach(x=>x.el.innerHTML=lang==='en'?x.en:x.th);
+ document.getElementById('langTh').classList.toggle('active',lang==='th');
+ document.getElementById('langEn').classList.toggle('active',lang==='en');
+ document.getElementById('langTh').setAttribute('aria-pressed',String(lang==='th'));
+ document.getElementById('langEn').setAttribute('aria-pressed',String(lang==='en'));
+ renderGrid();renderTerms();renderBlast();updateControls();paint();
+}
+
+document.getElementById('modeBtn').onclick=function(){FAILMODE=!FAILMODE;updateControls();paint();};
+document.getElementById('clearBtn').onclick=function(){SEL=null;paint();};
+document.getElementById('langTh').onclick=()=>setLanguage('th');
+document.getElementById('langEn').onclick=()=>setLanguage('en');
+setLanguage(LANG);
+
+
+</script>
+</body>
+</html>
