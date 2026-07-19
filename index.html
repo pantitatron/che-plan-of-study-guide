@@ -14,6 +14,7 @@
   --teal:#0C7B69; --teal-pale:#DCEEEA; --teal-deep:#08503F;
   --brick:#B23C25; --brick-pale:#FAE3DC;
   --amber:#9E6D05; --amber-pale:#FBEFD2;
+  --green:#1E7D45; --green-pale:#DCF0E2;
   --blue:#2D5F91; --blue-pale:#DEE9F3;
   --line:#C9D6D2; --line-soft:#E4EBE8;
   --r:8px;
@@ -50,7 +51,7 @@ h3{font-size:18.5px;font-weight:600;margin:36px 0 10px}
 .rules{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(265px,1fr))}
 .rule{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:20px 22px 22px;border-left:5px solid var(--teal)}
-.rule.co{border-left-color:var(--amber)} .rule.mod{border-left-color:var(--blue)}
+.rule.co{border-left-color:var(--green)} .rule.mod{border-left-color:var(--blue)}
 .rule.fail{border-left-color:var(--brick)}
 .rule .tag{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:7px}
@@ -60,7 +61,7 @@ h3{font-size:18.5px;font-weight:600;margin:36px 0 10px}
 .pill{font-family:"IBM Plex Mono",monospace;font-size:.87em;font-weight:500;
   background:var(--teal-pale);color:var(--teal-deep);padding:1px 6px;border-radius:3px;white-space:nowrap}
 .pill.no{background:var(--brick-pale);color:#8A2C17}
-.pill.co{background:var(--amber-pale);color:#75500A}
+.pill.co{background:var(--green-pale);color:#0F4D2A}
 
 .ex{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   overflow:hidden;margin:18px 0}
@@ -109,7 +110,7 @@ h3{font-size:18.5px;font-weight:600;margin:36px 0 10px}
 .chip.sel .c{color:#fff} .chip.sel .n{color:#8FA9A3}
 .chip.up{background:var(--brick-pale);border-left-color:var(--brick)}
 .chip.down{background:var(--blue-pale);border-left-color:var(--blue)}
-.chip.coq{background:var(--amber-pale);border-left-color:var(--amber)}
+.chip.coq{background:var(--green-pale);border-left-color:var(--green)}
 .chip.dim{opacity:.26}
 .chip.gen{border-left-style:dotted}
 
@@ -179,7 +180,7 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
 <header class="top"><div class="wrap">
   <p class="eyebrow">Plan of Study · Chemical Engineering · KMUTT</p>
   <h1>อ่านแผนการเรียนให้เป็น<br>ก่อนกดลงทะเบียน</h1>
-  <p>คู่มือแปลผังหลักสูตรวิศวกรรมเคมี ฉบับปรับปรุง 2568 (สำหรับรหัส 68 มีผลตั้งแต่ภาค 2/2568) ให้เป็นภาษาคน — อ่าน 10 นาที ประหยัดเวลาซ่อมวิชาได้เป็นเทอม</p>
+  <p>คู่มือแปลผังหลักสูตรวิศวกรรมเคมี ฉบับปรับปรุง 2568 (สำหรับรหัส 68 มีผลตั้งแต่ภาค 2/2568) ให้เข้าใจง่าย — อ่าน 10 นาที ประหยัดเวลาซ่อมวิชาได้เป็นเทอม</p>
 </div></header>
 
 <nav class="bar"><div class="wrap">
@@ -204,9 +205,9 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
     <div class="rule"><span class="tag">Prerequisite</span><strong>ต้องผ่านมาก่อน</strong>
       <p>วงเล็บใต้ชื่อวิชาที่<em>ไม่มี</em>คำว่า Co. เช่น <span class="pill">CHE210 (CHM10301-3)</span> — ต้องผ่าน CHM103 ครบทั้ง 3 โมดูลมาแล้วในเทอมก่อนหน้า ถึงจะลง CHE210 ได้</p></div>
     <div class="rule co"><span class="tag">Corequisite</span><strong>ต้องลงพร้อมกัน</strong>
-      <p>วงเล็บที่มีคำว่า <strong>Co.</strong> เช่น <span class="pill co">PHY10302 (Co.10301)</span> — เทอมไหนที่ลง PHY10302 ต้องลง PHY10301 ในเทอมเดียวกันเสมอ <strong>ถึงจะเคยผ่าน PHY10301 มาแล้วก็ตาม</strong></p></div>
+      <p>วงเล็บที่มีคำว่า <strong>Co.</strong> เช่น <span class="pill co">PHY10302 (Co.10301)</span> — เทอมไหนที่ลง PHY10302 ต้องลง PHY10301 ในเทอมเดียวกัน</p></div>
     <div class="rule mod"><span class="tag">Module</span><strong>วิชาที่แตกเป็นโมดูล</strong>
-      <p>เลขท้าย 2 หลักคือหมายเลขโมดูล เช่น MTH10101 = MATH101 โมดูล 1 · <span class="pill">CHM10301-3</span> ย่อมาจากโมดูล 1, 2 และ 3 รวมกัน — ต้องผ่าน<strong>ครบทุกโมดูล</strong>ที่ระบุ</p></div>
+      <p>เลขท้าย 2 หลักคือหมายเลขโมดูล เช่น MTH10101 = MTH101 โมดูล 1 · <span class="pill">CHM10301-3</span> ย่อมาจากโมดูล 1, 2 และ 3 รวมกัน</p></div>
     <div class="rule fail"><span class="tag">Passing</span><strong>ผ่าน = ไม่ติด F</strong>
       <p>เกรดอะไรก็ได้ที่ไม่ใช่ F ถือว่าผ่านและปลดล็อกวิชาต่อได้ ส่วนวิชาที่ติด F ต้องลงซ้ำในเทอมถัดไปที่เปิดสอน</p></div>
   </div>
@@ -217,42 +218,38 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
   <p class="lede">จากกฎ 4 ข้อข้างบน มี 2 จุดที่นักศึกษาลงทะเบียนผิดซ้ำๆ ทุกปี อ่านสองหัวข้อนี้ให้ละเอียดหน่อย</p>
 
   <h3>ก. โมดูลตรวจแยกตัว ไม่ตรวจเป็นชุด</h3>
-  <p>คนส่วนใหญ่คิดว่า "ต้องผ่าน MATH101 ทั้งวิชา ถึงจะขึ้น MATH102 ได้" — <strong>ไม่จริง</strong> แต่ละโมดูลของ MTH102 มีเงื่อนไขของตัวเอง</p>
   <table>
     <tr><th style="width:135px">โมดูล</th><th style="width:195px">ต้องผ่านอะไรมาก่อน</th><th>แปลว่า</th></tr>
-    <tr><td class="c">MTH10201</td><td class="c none">— ไม่มี —</td><td>ลงได้เลย ไม่ว่าจะสอบ MATH101 ผ่านหรือไม่</td></tr>
-    <tr><td class="c">MTH10202</td><td class="c">MTH10101</td><td>ผูกกับโมดูล 1 ของ MATH101 เท่านั้น</td></tr>
-    <tr><td class="c">MTH10203</td><td class="c">MTH10102</td><td>ผูกกับโมดูล 2 ของ MATH101 เท่านั้น</td></tr>
+    <tr><td class="c">MTH10201</td><td class="c none">— ไม่มี —</td><td>ลงได้เลย ไม่ว่าจะสอบ MTH101 ผ่านหรือไม่</td></tr>
+    <tr><td class="c">MTH10202</td><td class="c">MTH10101</td><td>ผูกกับโมดูล 1 ของ MTH101 เท่านั้น</td></tr>
+    <tr><td class="c">MTH10203</td><td class="c">MTH10102</td><td>ผูกกับโมดูล 2 ของ MTH101 เท่านั้น</td></tr>
   </table>
 
-  <div class="ex"><div class="head">กรณีที่ 1 — เทอม 1 ตก MATH101 ทั้งสองโมดูล</div><div class="body"><ul>
+  <div class="ex"><div class="head">กรณีที่ 1 — เทอม 1 ตก MTH101 ทั้งสองโมดูล</div><div class="body"><ul>
     <li class="yes">เทอม 2 ลง <span class="pill">MTH10201</span> ได้ (ไม่มีเงื่อนไข)</li>
     <li class="no">ลง <span class="pill no">MTH10202</span> และ <span class="pill no">MTH10203</span> ไม่ได้</li>
-    <li class="warn">ต้องลง <span class="pill co">MTH10101</span> + <span class="pill co">MTH10102</span> ซ่อมในเทอม 2 ด้วย</li>
+    <li class="warn">ต้องลง <span class="pill co">MTH10101</span> + <span class="pill co">MTH10102</span> ซ่อมในเทอม 2 ด้วย หรือสามารถซ่อมเทอมอื่นได้ แต่จะจบช้า</li>
   </ul></div></div>
 
   <div class="ex"><div class="head">กรณีที่ 2 — เทอม 1 ผ่าน MTH10101 แต่ตก MTH10102</div><div class="body"><ul>
     <li class="yes">เทอม 2 ลง <span class="pill">MTH10201</span> และ <span class="pill">MTH10202</span> ได้</li>
     <li class="no">ลง <span class="pill no">MTH10203</span> ไม่ได้ เพราะยังไม่ผ่าน MTH10102</li>
-    <li class="warn">ต้องลง <span class="pill co">MTH10102</span> ซ่อมในเทอม 2 ด้วย</li>
+    <li class="warn">ต้องลง <span class="pill co">MTH10102</span> ซ่อมในเทอม 2 ด้วย หรือสามารถซ่อมเทอมอื่นได้ แต่จะจบช้า</li>
   </ul></div></div>
 
   <div class="callout"><strong>ปลายทางยังต้องครบอยู่ดี</strong> — การเก็บโมดูลค้างไว้ทำได้ในระยะสั้น แต่ <span class="pill">MTH20101</span> ต้องการ MTH10202 + MTH10203 ครบ · <span class="pill">PRE372</span> ต้องการ MTH10201 + 10202 + 10203 ครบ · <span class="pill">MTH303</span> ต้องการ MTH20101 + 20102 ครบ ยิ่งค้างนาน ยิ่งดันวิชาปีสูงถอยหลัง</div>
 
   <h3>ข. Co. คือ "ต้องลงคู่" ไม่ใช่ "ต้องผ่านก่อน"</h3>
-  <p>นี่คือกฎที่ผิดกันมากที่สุด กลุ่มที่มี Co. คือ PHY103, PHY104, PHY191 และ PHY192 — โมดูล 2 และ 3 <strong>ผูกติดกับโมดูล 1 ตลอดไป</strong> ทุกครั้งที่ลง</p>
 
   <div class="ex"><div class="head">กรณีที่ 3 — เทอม 1 ผ่าน PHY10301 แต่ตก PHY10302</div><div class="body"><ul>
-    <li class="no">เทอม 2 ลง <span class="pill no">PHY10302</span> ตัวเดียว <strong>ไม่ได้</strong></li>
-    <li class="yes">ต้องลง <span class="pill co">PHY10301</span> + <span class="pill co">PHY10302</span> คู่กัน แม้จะเคยผ่าน 10301 แล้วก็ตาม</li>
+    <li class="yes">เทอม 2 ลง <span class="pill">PHY10302</span> ตัวเดียวได้</li>
+    <li class="plain">ไม่ต้องลง PHY10301 ซ้ำ เพราะผ่านมาแล้ว</li>
   </ul></div></div>
 
-  <div class="ex"><div class="head">กรณีที่ 4 — เทอม 1 ผ่าน PHY10301 และ PHY10302 แต่ตก PHY10303</div><div class="body"><ul>
-    <li class="yes">เทอม 2 ลง <span class="pill co">PHY10301</span> + <span class="pill co">PHY10303</span></li>
-    <li class="plain">ไม่ต้องลง PHY10302 ซ้ำ เพราะ 10303 ผูกกับ 10301 เท่านั้น ไม่ได้ผูกกับ 10302</li>
+  <div class="ex"><div class="head">กรณีที่ 4 — เทอม 1 ผ่าน PHY10302, PHY10303 และ PHY191 แต่ไม่ผ่าน PHY10301</div><div class="body"><ul>
+    <li class="no">เทอม 2 ลง <span class="pill no">PHY10401</span>, <span class="pill no">PHY10402</span>, <span class="pill no">PHY10403</span> และ <span class="pill no">PHY192</span> ไม่ได้</li>
+    <li class="warn">ต้องไปแก้ <span class="pill co">PHY10301</span> ให้ผ่านก่อน ถึงจะลงกลุ่มนี้ได้</li>
   </ul></div></div>
-
-  <p>หลักเดียวกันใช้กับแล็บ: <span class="pill co">PHY191 (Co.PHY10301)</span> และ <span class="pill co">PHY192 (Co.PHY10401)</span> — จะลงแล็บฟิสิกส์ ต้องลงตัวทฤษฎีโมดูล 1 พร้อมกันในเทอมนั้นเสมอ</p>
 </section>
 
 <section id="map">
@@ -267,7 +264,7 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
   <div class="legend">
     <span><i class="sw" style="background:var(--ink)"></i>วิชาที่เลือก</span>
     <span><i class="sw" style="background:var(--brick-pale);border-left:3px solid var(--brick)"></i>ต้องผ่านก่อน</span>
-    <span><i class="sw" style="background:var(--amber-pale);border-left:3px solid var(--amber)"></i>ต้องลงพร้อมกัน</span>
+    <span><i class="sw" style="background:var(--green-pale);border-left:3px solid var(--green)"></i>ต้องลงพร้อมกัน</span>
     <span><i class="sw" style="background:var(--blue-pale);border-left:3px solid var(--blue)"></i>วิชาที่ปลดล็อกต่อ</span>
   </div>
 
@@ -283,9 +280,9 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
 
 <section id="blast">
   <h2><span class="num">05</span> ถ้าตกวิชานี้ จะลงอะไรไม่ได้บ้าง</h2>
-  <p class="lede">ใช้ตอนประกาศผลสอบ ดูว่าตัวที่ติด F ไปกระทบแผนข้างหน้าแค่ไหน คอลัมน์ขวาไล่ผลกระทบต่อเนื่องให้ครบทุกทอดแล้ว — ตัวหนาคือวิชาที่โดนบล็อกโดยตรง</p>
+  <p class="lede">ใช้ตอนประกาศผลสอบ ดูว่าตัวที่ติด F ไปกระทบแผนข้างหน้าแค่ไหน คอลัมน์ขวาไล่ผลกระทบต่อเนื่องให้ครบทุกทอดแล้ว — ตัวหนาคือวิชาตัวต่อของวิชานี้</p>
   <div id="blastTable"></div>
-  <div class="callout"><strong>สังเกตให้ดี:</strong> ต้นน้ำที่กระทบแรงที่สุดคือ <span class="pill">CHM103</span> และ <span class="pill">PHY103</span> ในเทอม 1 กับ <span class="pill">CHE103</span> ในเทอม 2 — สามตัวนี้เลี้ยงทั้งหลักสูตร ตกแล้วโดนดันยาวหลายปี จัดลำดับความสำคัญตอนอ่านหนังสือให้ถูก</div>
+  <div class="callout"><strong>ต้องระวัง:</strong> <span class="pill">CHM103</span> และ <span class="pill">PHY103</span> ในเทอม 1 กับ <span class="pill">CHE103</span> ในเทอม 2 ไว้ เนื่องจากกระทบหลายวิชา</div>
 </section>
 
 <section id="check">
@@ -294,7 +291,6 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
     <li>วิชาที่ติด F เทอมที่แล้ว <strong>อยู่ในใบลงทะเบียนเทอมนี้ครบหรือยัง</strong></li>
     <li>วิชาใหม่ทุกตัว <strong>เคลียร์เงื่อนไข "ต้องผ่านก่อน" ครบทุกโมดูลแล้วหรือยัง</strong> — เช็กทีละโมดูล ไม่ใช่เช็กทั้งวิชา</li>
     <li>ถ้าลงโมดูลที่มี <strong>Co.</strong> ได้ใส่โมดูล 1 ที่ผูกกันไว้ในใบเดียวกันแล้วหรือยัง</li>
-    <li>ลงแล็บ (PHY191, PHY192) โดยไม่ได้ลงตัวทฤษฎีคู่กันอยู่หรือเปล่า</li>
     <li>หน่วยกิตรวมอยู่ในเกณฑ์ที่ระเบียบมหาวิทยาลัยกำหนดหรือไม่</li>
     <li>วิชาที่เลื่อนไปเทอมหน้า จะไปชนกับวิชาบังคับของเทอมนั้นจนหน่วยกิตเกินไหม</li>
   </ol>
@@ -311,44 +307,44 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:22px 0 70px;
 const CHM3=["CHM10301","CHM10302","CHM10303"];
 const T=[
  {n:"เทอม 1",s:"ปี 1 · ภาค 1",cr:"18(15-7-36)",c:[
-  {k:"CHM10301",t:"Fund. Chemistry",u:"3(3-0-6)"},
-  {k:"CHM10302",t:"— โมดูล 2",u:"รวมใน CHM103"},
-  {k:"CHM10303",t:"— โมดูล 3",u:"รวมใน CHM103"},
+  {k:"CHM10301",t:"Fund. Chemistry",u:"1(1-0-2)"},
+  {k:"CHM10302",t:"— โมดูล 2",u:"1(1-0-2)"},
+  {k:"CHM10303",t:"— โมดูล 3",u:"1(1-0-2)"},
   {k:"CHM160",t:"Chemistry Lab.",u:"1(0-3-2)",p:CHM3},
-  {k:"MTH10101",t:"Math I",u:"3(3-0-6)"},
-  {k:"MTH10102",t:"— โมดูล 2",u:"รวมใน MTH101"},
-  {k:"PHY10301",t:"Physics I",u:"3(3-0-6)"},
-  {k:"PHY10302",t:"— โมดูล 2",u:"รวมใน PHY103",o:["PHY10301"]},
-  {k:"PHY10303",t:"— โมดูล 3",u:"รวมใน PHY103",o:["PHY10301"]},
+  {k:"MTH10101",t:"Math I",u:"2(2-0-4)"},
+  {k:"MTH10102",t:"— โมดูล 2",u:"1(1-0-2)"},
+  {k:"PHY10301",t:"Physics I",u:"1(1-0-2)"},
+  {k:"PHY10302",t:"— โมดูล 2",u:"1(1-0-2)",o:["PHY10301"]},
+  {k:"PHY10303",t:"— โมดูล 3",u:"1(1-0-2)",o:["PHY10301"]},
   {k:"PHY191",t:"Gen. Physics Lab. I",u:"1(0-2-2)",o:["PHY10301"]},
   {k:"LNG120",t:"Gen. English",u:"3(3-0-6)"},
   {k:"GEN101",t:"Physical Education",u:"1(0-2-2)",g:1},
   {k:"GEN111",t:"Man and Ethics",u:"3(3-0-6)",g:1}]},
  {n:"เทอม 2",s:"ปี 1 · ภาค 2",cr:"19(17-5-36)",c:[
-  {k:"MTH10201",t:"Math II",u:"3(3-0-6)"},
-  {k:"MTH10202",t:"— โมดูล 2",u:"รวมใน MTH102",p:["MTH10101"]},
-  {k:"MTH10203",t:"— โมดูล 3",u:"รวมใน MTH102",p:["MTH10102"]},
-  {k:"PHY10401",t:"Physics II",u:"3(3-0-6)",p:["PHY10301"]},
-  {k:"PHY10402",t:"— โมดูล 2",u:"รวมใน PHY104",o:["PHY10401"]},
-  {k:"PHY10403",t:"— โมดูล 3",u:"รวมใน PHY104",o:["PHY10401"]},
+  {k:"MTH10201",t:"Math II",u:"1(1-0-2)"},
+  {k:"MTH10202",t:"— โมดูล 2",u:"1(1-0-2)",p:["MTH10101"]},
+  {k:"MTH10203",t:"— โมดูล 3",u:"1(1-0-2)",p:["MTH10102"]},
+  {k:"PHY10401",t:"Physics II",u:"1(1-0-2)",p:["PHY10301"]},
+  {k:"PHY10402",t:"— โมดูล 2",u:"1(1-0-2)",o:["PHY10401"]},
+  {k:"PHY10403",t:"— โมดูล 3",u:"1(1-0-2)",o:["PHY10401"]},
   {k:"PHY192",t:"Gen. Physics Lab. II",u:"1(0-2-2)",o:["PHY10401"]},
-  {k:"CHE10301",t:"Mat. & Ener. Bal.",u:"3(3-0-6)",p:CHM3},
-  {k:"CHE10302",t:"— โมดูล 2",u:"รวมใน CHE103",p:CHM3},
+  {k:"CHE10301",t:"Mat. & Ener. Bal.",u:"2(2-0-4)",p:CHM3},
+  {k:"CHE10302",t:"— โมดูล 2",u:"1(1-0-2)",p:CHM3},
   {k:"CHE214",t:"Phys. Chem.",u:"3(3-0-6)",p:CHM3},
   {k:"MEE119",t:"Mec. Eng. Drawing",u:"3(2-3-4)"},
   {k:"LNG220",t:"Aca. English",u:"3(3-0-6)",p:["LNG120"]}]},
  {n:"เทอม 3",s:"ปี 2 · ภาค 1",cr:"18(17-2-36)",c:[
-  {k:"MTH20101",t:"Math III (1 นก.)",u:"1",p:["MTH10202","MTH10203"]},
-  {k:"MTH20102",t:"Math III (2 นก.)",u:"2",p:["MTH10101","MTH10102"]},
+  {k:"MTH20101",t:"Math III (1 นก.)",u:"1(1-0-2)",p:["MTH10202","MTH10203"]},
+  {k:"MTH20102",t:"Math III (2 นก.)",u:"2(2-0-4)",p:["MTH10101","MTH10102"]},
   {k:"CHE210",t:"Org. Chem.",u:"3(3-0-6)",p:CHM3},
   {k:"CHE24101",t:"Thermo. I",u:"3(3-0-6)",p:["CHE10301","CHE10302"]},
   {k:"MEE214",t:"Eng. Mechanics",u:"3(3-0-6)",p:["PHY10301","PHY10302","PHY10303"]},
   {k:"CPE100",t:"Com. Pro. for Eng.",u:"3(2-2-6)"},
   {k:"LNG223",t:"Engl. for Workplace",u:"3(3-0-6)",p:["LNG220"]}]},
  {n:"เทอม 4",s:"ปี 2 · ภาค 2",cr:"19(16-8-36)",c:[
-  {k:"CHE23201",t:"Transport Phen.",u:"3",p:["CHE10301","PHY10301"]},
-  {k:"CHE23202",t:"— โมดูล 2",u:"รวมใน CHE232",p:["CHE10301","CHE10302","PHY10303"]},
-  {k:"CHE23203",t:"— โมดูล 3",u:"รวมใน CHE232",p:["CHE10301"]},
+  {k:"CHE23201",t:"Transport Phen.",u:"1(1-0-2)",p:["CHE10301","PHY10301"]},
+  {k:"CHE23202",t:"— โมดูล 2",u:"1(1-0-2)",p:["CHE10301","CHE10302","PHY10303"]},
+  {k:"CHE23203",t:"— โมดูล 3",u:"1(1-0-2)",p:["CHE10301"]},
   {k:"CHE212",t:"Org. Chem. Lab.",u:"1(0-3-2)",p:["CHE210"]},
   {k:"CHE242",t:"Thermo. II",u:"3(3-0-6)",p:["CHE24101"]},
   {k:"MTH303",t:"Numer. Methods",u:"3(3-0-6)",p:["MTH20101","MTH20102"]},
@@ -357,9 +353,9 @@ const T=[
   {k:"GEN121",t:"Learn. & Prob. Solv.",u:"3(3-0-6)",g:1}]},
  {n:"เทอม 5",s:"ปี 3 · ภาค 1",cr:"18(18-0-36)",c:[
   {k:"CHE333",t:"Fluid Mech. & Equip.",u:"3(3-0-6)",p:["CHE23201"]},
-  {k:"CHE33401",t:"Heat Trans. & Equip.",u:"3",p:["CHE23201","CHE23202"]},
-  {k:"CHE33402",t:"— โมดูล 2",u:"รวมใน CHE334",p:["CHE23201","CHE23202"]},
-  {k:"CHE33403",t:"— โมดูล 3",u:"รวมใน CHE334",p:["CHE23201","CHE23202","CHE23203"]},
+  {k:"CHE33401",t:"Heat Trans. & Equip.",u:"1(1-0-2)",p:["CHE23201","CHE23202"]},
+  {k:"CHE33402",t:"— โมดูล 2",u:"1(1-0-2)",p:["CHE23201","CHE23202"]},
+  {k:"CHE33403",t:"— โมดูล 3",u:"1(1-0-2)",p:["CHE23201","CHE23202","CHE23203"]},
   {k:"CHE343",t:"Kine. & Reactor Des.",u:"3(3-0-6)",p:["CHE242"]},
   {k:"CHE471",t:"Eng. Mat. & Selection",u:"3(3-0-6)",p:CHM3},
   {k:"GEN231",t:"Miracle of Thinking",u:"3(3-0-6)",g:1},
@@ -367,7 +363,7 @@ const T=[
  {n:"เทอม 6",s:"ปี 3 · ภาค 2",cr:"17(16-3-34)",c:[
   {k:"CHE335",t:"Mass Trans. & Equip.",u:"3(3-0-6)",p:["CHE242","CHE23201","CHE23202","CHE23203"]},
   {k:"CHE451",t:"Process Equip. Des.",u:"3(3-0-6)",p:["MEE214","CHE471"]},
-  {k:"CHE461",t:"Process Dyn. & Control",u:"3(3-0-6)",p:["MTH20101","MTH20102","CHE333","CHE343","PHY10301","PHY10302","PHY10303"]},
+  {k:"CHE461",t:"Process Dyn. & Control",u:"3(3-0-6)",p:["MTH20101","MTH20102","CHE333","CHE343"]},
   {k:"CHE481",t:"Chem. Eng. Lab. I",u:"2(1-3-4)",p:["CHE333","CHE33401","CHE33402","CHE33403"]},
   {k:"PRE380",t:"Eng. Economics",u:"3(3-0-6)"},
   {k:"GEN xxx",t:"วิชาเลือก GEN I",u:"3(3-0-6)",g:1}]},
@@ -399,7 +395,7 @@ const UI={
   none:"— ไม่มี —",failThis:"ถ้าติด F ตัวนี้",blockedSummary:n=>`จะลงอีก <strong style="margin:0 4px">${n}</strong> วิชาไม่ได้ จนกว่าจะซ่อมผ่าน`,
   noImpact:"ไม่กระทบวิชาอื่น",blockedCourses:"วิชาที่โดนบล็อก",prereq:"ต้องผ่านก่อน",
   coreq:"ต้องลงพร้อมกัน",unlocks:"ปลดล็อกวิชาต่อ",course:"วิชา",credits:"หน่วยกิต",
-  prereqHeader:"ต้องผ่านก่อน",coreqName:"ลงพร้อม / ชื่อวิชา",blastFail:"ถ้าติด F วิชานี้",
+  prereqHeader:"ต้องผ่านก่อน",coreqName:"ลงพร้อม",blastFail:"ถ้าติด F วิชานี้",
   blastBlocked:"จะลงวิชาเหล่านี้ไม่ได้"
  },
  en:{
@@ -409,7 +405,7 @@ const UI={
   none:"— None —",failThis:"If this course is failed",blockedSummary:n=>`You will be unable to register for <strong style="margin:0 4px">${n}</strong> additional course(s) until the failed course is passed.`,
   noImpact:"No other course is affected",blockedCourses:"Blocked courses",prereq:"Prerequisites",
   coreq:"Corequisites",unlocks:"Courses unlocked",course:"Course",credits:"Credits",
-  prereqHeader:"Prerequisite",coreqName:"Corequisite / Course name",blastFail:"If this course is failed",
+  prereqHeader:"Prerequisite",coreqName:"Corequisite",blastFail:"If this course is failed",
   blastBlocked:"These courses become unavailable"
  }
 };
@@ -458,7 +454,7 @@ function blast(k){
  return blocked;
 }
 
-const STATIC_TRANSLATIONS=[{"selector":"header.top h1","index":0,"en":"Understand Your Study Plan<br>Before You Register"},{"selector":"header.top .wrap > p","index":1,"en":"A plain-language guide to the revised B.E. 2568 Chemical Engineering curriculum for student ID 68, effective from Semester 2/B.E. 2568 — ten minutes of reading may prevent a semester-long delay."},{"selector":"nav.bar a","index":0,"en":"4 Key Rules"},{"selector":"nav.bar a","index":1,"en":"Common Mistakes"},{"selector":"nav.bar a","index":2,"en":"Course Map"},{"selector":"nav.bar a","index":3,"en":"8-Semester Plan"},{"selector":"nav.bar a","index":4,"en":"If You Fail"},{"selector":"nav.bar a","index":5,"en":"Checklist"},{"selector":"#rules h2","index":0,"en":"<span class=\"num\">01</span> Only 4 Rules to Know"},{"selector":"#rules .lede","index":0,"en":"The curriculum map may look complicated, but it is built around only four types of rules. Learn these and you can read the entire map."},{"selector":"#rules .rule strong","index":0,"en":"Must be passed beforehand"},{"selector":"#rules .rule p","index":0,"en":"Parentheses beneath a course name that do <em>not</em> contain “Co.”, such as <span class=\"pill\">CHE210 (CHM10301-3)</span>, mean that all three CHM103 modules must have been passed in an earlier semester before CHE210 can be taken."},{"selector":"#rules .rule strong","index":1,"en":"Must be taken together"},{"selector":"#rules .rule p","index":1,"en":"Parentheses containing <strong>Co.</strong>, such as <span class=\"pill co\">PHY10302 (Co.10301)</span>, mean that PHY10301 must be registered in the same semester whenever PHY10302 is taken, <strong>even if PHY10301 was passed previously</strong>."},{"selector":"#rules .rule strong","index":2,"en":"Courses divided into modules"},{"selector":"#rules .rule p","index":2,"en":"The last two digits identify the module. For example, MTH10101 means MATH101 Module 1. <span class=\"pill\">CHM10301-3</span> is shorthand for Modules 1, 2, and 3 together, and <strong>every listed module</strong> must be passed."},{"selector":"#rules .rule strong","index":3,"en":"Passed = no F grade"},{"selector":"#rules .rule p","index":3,"en":"Any grade other than F counts as a pass and unlocks subsequent courses. A failed course must be repeated in the next semester in which it is offered."},{"selector":"#mistakes h2","index":0,"en":"<span class=\"num\">02</span> The Most Common Registration Mistakes"},{"selector":"#mistakes .lede","index":0,"en":"Two misunderstandings repeatedly cause registration errors. Read these sections carefully before choosing courses."},{"selector":"#mistakes h3","index":0,"en":"A. Modules are checked individually, not as a bundle"},{"selector":"#mistakes h3 + p","index":0,"en":"Many students assume that the whole of MATH101 must be passed before any part of MATH102 can be taken. <strong>This is not correct.</strong> Each MTH102 module has its own prerequisite."},{"selector":"#mistakes table th","index":0,"en":"Module"},{"selector":"#mistakes table th","index":1,"en":"Prerequisite"},{"selector":"#mistakes table th","index":2,"en":"Meaning"},{"selector":"#mistakes table tr:nth-child(2) td","index":1,"en":"— None —"},{"selector":"#mistakes table tr:nth-child(2) td","index":2,"en":"May be taken immediately, whether or not MATH101 has been passed."},{"selector":"#mistakes table tr:nth-child(3) td","index":2,"en":"Linked only to MATH101 Module 1."},{"selector":"#mistakes table tr:nth-child(4) td","index":2,"en":"Linked only to MATH101 Module 2."},{"selector":"#mistakes .ex .head","index":0,"en":"Case 1 — Both MATH101 modules were failed in Semester 1"},{"selector":"#mistakes .ex li","index":0,"en":"In Semester 2, <span class=\"pill\">MTH10201</span> may still be taken because it has no prerequisite."},{"selector":"#mistakes .ex li","index":1,"en":"<span class=\"pill no\">MTH10202</span> and <span class=\"pill no\">MTH10203</span> cannot be taken."},{"selector":"#mistakes .ex li","index":2,"en":"<span class=\"pill co\">MTH10101</span> and <span class=\"pill co\">MTH10102</span> must also be repeated in Semester 2."},{"selector":"#mistakes .ex .head","index":1,"en":"Case 2 — MTH10101 was passed but MTH10102 was failed in Semester 1"},{"selector":"#mistakes .ex li","index":3,"en":"In Semester 2, <span class=\"pill\">MTH10201</span> and <span class=\"pill\">MTH10202</span> may be taken."},{"selector":"#mistakes .ex li","index":4,"en":"<span class=\"pill no\">MTH10203</span> cannot be taken because MTH10102 has not yet been passed."},{"selector":"#mistakes .ex li","index":5,"en":"<span class=\"pill co\">MTH10102</span> must also be repeated in Semester 2."},{"selector":"#mistakes .callout","index":0,"en":"<strong>All required modules must eventually be completed.</strong> A missing module can be carried temporarily, but <span class=\"pill\">MTH20101</span> requires both MTH10202 and MTH10203; <span class=\"pill\">PRE372</span> requires MTH10201, MTH10202, and MTH10203; and <span class=\"pill\">MTH303</span> requires MTH20101 and MTH20102. The longer a module remains incomplete, the more upper-year courses are delayed."},{"selector":"#mistakes h3","index":1,"en":"B. “Co.” means taken together, not passed beforehand"},{"selector":"#mistakes h3 + p","index":1,"en":"This is the most frequently misunderstood rule. The Co. groups are PHY103, PHY104, PHY191, and PHY192. Modules 2 and 3 remain linked to Module 1 every time they are registered."},{"selector":"#mistakes .ex .head","index":2,"en":"Case 3 — PHY10301 was passed but PHY10302 was failed in Semester 1"},{"selector":"#mistakes .ex li","index":6,"en":"In Semester 2, <span class=\"pill no\">PHY10302</span> cannot be registered by itself."},{"selector":"#mistakes .ex li","index":7,"en":"<span class=\"pill co\">PHY10301</span> and <span class=\"pill co\">PHY10302</span> must be registered together, even though PHY10301 was previously passed."},{"selector":"#mistakes .ex .head","index":3,"en":"Case 4 — PHY10301 and PHY10302 were passed, but PHY10303 was failed"},{"selector":"#mistakes .ex li","index":8,"en":"In Semester 2, register <span class=\"pill co\">PHY10301</span> together with <span class=\"pill co\">PHY10303</span>."},{"selector":"#mistakes .ex li","index":9,"en":"PHY10302 does not need to be repeated because PHY10303 is linked only to PHY10301, not to PHY10302."},{"selector":"#mistakes > p","index":3,"en":"The same rule applies to laboratories: <span class=\"pill co\">PHY191 (Co.PHY10301)</span> and <span class=\"pill co\">PHY192 (Co.PHY10401)</span>. To register for a physics laboratory, the linked theory Module 1 must be registered in the same semester."},{"selector":"#map h2","index":0,"en":"<span class=\"num\">03</span> Interactive Course Map"},{"selector":"#map .lede","index":0,"en":"Select any course to see its <strong>prerequisites</strong> and the courses it <strong>unlocks</strong>. Turn on “If this course is failed” mode to see how one F grade can affect the rest of the curriculum."},{"selector":"#map .hint","index":0,"en":"Select a course in the map below"},{"selector":"#map .legend span","index":0,"en":"<i class=\"sw\" style=\"background:var(--ink)\"></i>Selected course"},{"selector":"#map .legend span","index":1,"en":"<i class=\"sw\" style=\"background:var(--brick-pale);border-left:3px solid var(--brick)\"></i>Prerequisite"},{"selector":"#map .legend span","index":2,"en":"<i class=\"sw\" style=\"background:var(--amber-pale);border-left:3px solid var(--amber)\"></i>Corequisite"},{"selector":"#map .legend span","index":3,"en":"<i class=\"sw\" style=\"background:var(--blue-pale);border-left:3px solid var(--blue)\"></i>Unlocked course"},{"selector":"#terms h2","index":0,"en":"<span class=\"num\">04</span> Complete 8-Semester Study Plan"},{"selector":"#terms .lede","index":0,"en":"The “Prerequisite” column lists courses that must already have been passed. The “Corequisite / Course name” column shows courses that must appear in the same registration record."},{"selector":"#blast h2","index":0,"en":"<span class=\"num\">05</span> What Becomes Unavailable If This Course Is Failed?"},{"selector":"#blast .lede","index":0,"en":"Use this section after grades are released to see how an F may affect future study. The right-hand column includes the full chain of consequences; bold course codes are blocked directly."},{"selector":"#blast .callout","index":0,"en":"<strong>Important:</strong> The most influential upstream courses are <span class=\"pill\">CHM103</span> and <span class=\"pill\">PHY103</span> in Semester 1, and <span class=\"pill\">CHE103</span> in Semester 2. These courses feed into large parts of the curriculum, so failing them may cause multi-year delays. Prioritize them appropriately when planning your study time."},{"selector":"#check h2","index":0,"en":"<span class=\"num\">06</span> Six Checks Before Confirming Registration"},{"selector":"#check li","index":0,"en":"Are all courses failed last semester <strong>included in this semester’s registration</strong>?"},{"selector":"#check li","index":1,"en":"For every new course, have <strong>all prerequisite modules been passed</strong>? Check module by module, not only by course title."},{"selector":"#check li","index":2,"en":"When registering for a module marked <strong>Co.</strong>, have you also included its linked Module 1 in the same registration?"},{"selector":"#check li","index":3,"en":"Are you registering for PHY191 or PHY192 without the required linked theory course?"},{"selector":"#check li","index":4,"en":"Is the total credit load within the university regulations?"},{"selector":"#check li","index":5,"en":"Will a postponed course conflict with compulsory courses next semester and cause the credit load to exceed the limit?"},{"selector":"footer","index":0,"en":"Prepared from the revised B.E. 2568 Chemical Engineering curriculum map, KMUTT (academic approval: 26 March B.E. 2569). Applicable to student ID 68 from Semester 2/B.E. 2568 onward.<br>This is a simplified guide for understanding the study plan. If any information conflicts with the official curriculum or university regulations, follow the official documents and consult your academic advisor before registration."}];
+const STATIC_TRANSLATIONS=[{"selector":"header.top h1","index":0,"en":"Understand Your Study Plan<br>Before You Register"},{"selector":"header.top .wrap > p","index":1,"en":"A plain-language guide to the revised B.E. 2568 Chemical Engineering curriculum for student ID 68, effective from Semester 2/B.E. 2568 — ten minutes of reading may prevent a semester-long delay."},{"selector":"nav.bar a","index":0,"en":"4 Key Rules"},{"selector":"nav.bar a","index":1,"en":"Common Mistakes"},{"selector":"nav.bar a","index":2,"en":"Course Map"},{"selector":"nav.bar a","index":3,"en":"8-Semester Plan"},{"selector":"nav.bar a","index":4,"en":"If You Fail"},{"selector":"nav.bar a","index":5,"en":"Checklist"},{"selector":"#rules h2","index":0,"en":"<span class=\"num\">01</span> Only 4 Rules to Know"},{"selector":"#rules .lede","index":0,"en":"The curriculum map may look complicated, but it is built around only four types of rules. Learn these and you can read the entire map."},{"selector":"#rules .rule strong","index":0,"en":"Must be passed beforehand"},{"selector":"#rules .rule p","index":0,"en":"Parentheses beneath a course name that do <em>not</em> contain “Co.”, such as <span class=\"pill\">CHE210 (CHM10301-3)</span>, mean that all three CHM103 modules must have been passed in an earlier semester before CHE210 can be taken."},{"selector":"#rules .rule strong","index":1,"en":"Must be taken together"},{"selector":"#rules .rule p","index":1,"en":"Parentheses containing <strong>Co.</strong>, such as <span class=\"pill co\">PHY10302 (Co.10301)</span>, mean that PHY10301 must be registered in the same semester whenever PHY10302 is taken."},{"selector":"#rules .rule strong","index":2,"en":"Courses divided into modules"},{"selector":"#rules .rule p","index":2,"en":"The last two digits identify the module. For example, MTH10101 means MTH101 Module 1. <span class=\"pill\">CHM10301-3</span> is shorthand for Modules 1, 2, and 3 together."},{"selector":"#rules .rule strong","index":3,"en":"Passed = no F grade"},{"selector":"#rules .rule p","index":3,"en":"Any grade other than F counts as a pass and unlocks subsequent courses. A failed course must be repeated in the next semester in which it is offered."},{"selector":"#mistakes h2","index":0,"en":"<span class=\"num\">02</span> The Most Common Registration Mistakes"},{"selector":"#mistakes .lede","index":0,"en":"Two misunderstandings repeatedly cause registration errors. Read these sections carefully before choosing courses."},{"selector":"#mistakes h3","index":0,"en":"A. Modules are checked individually, not as a bundle"},{"selector":"#mistakes table th","index":0,"en":"Module"},{"selector":"#mistakes table th","index":1,"en":"Prerequisite"},{"selector":"#mistakes table th","index":2,"en":"Meaning"},{"selector":"#mistakes table tr:nth-child(2) td","index":1,"en":"— None —"},{"selector":"#mistakes table tr:nth-child(2) td","index":2,"en":"May be taken immediately, whether or not MTH101 has been passed."},{"selector":"#mistakes table tr:nth-child(3) td","index":2,"en":"Linked only to MTH101 Module 1."},{"selector":"#mistakes table tr:nth-child(4) td","index":2,"en":"Linked only to MTH101 Module 2."},{"selector":"#mistakes .ex .head","index":0,"en":"Case 1 — Both MTH101 modules were failed in Semester 1"},{"selector":"#mistakes .ex li","index":0,"en":"In Semester 2, <span class=\"pill\">MTH10201</span> may still be taken because it has no prerequisite."},{"selector":"#mistakes .ex li","index":1,"en":"<span class=\"pill no\">MTH10202</span> and <span class=\"pill no\">MTH10203</span> cannot be taken."},{"selector":"#mistakes .ex li","index":2,"en":"<span class=\"pill co\">MTH10101</span> and <span class=\"pill co\">MTH10102</span> should be retaken in Semester 2 — they can be retaken in a later semester instead, but that will delay graduation."},{"selector":"#mistakes .ex .head","index":1,"en":"Case 2 — MTH10101 was passed but MTH10102 was failed in Semester 1"},{"selector":"#mistakes .ex li","index":3,"en":"In Semester 2, <span class=\"pill\">MTH10201</span> and <span class=\"pill\">MTH10202</span> may be taken."},{"selector":"#mistakes .ex li","index":4,"en":"<span class=\"pill no\">MTH10203</span> cannot be taken because MTH10102 has not yet been passed."},{"selector":"#mistakes .ex li","index":5,"en":"<span class=\"pill co\">MTH10102</span> should be retaken in Semester 2 — it can be retaken in a later semester instead, but that will delay graduation."},{"selector":"#mistakes .callout","index":0,"en":"<strong>All required modules must eventually be completed.</strong> A missing module can be carried temporarily, but <span class=\"pill\">MTH20101</span> requires both MTH10202 and MTH10203; <span class=\"pill\">PRE372</span> requires MTH10201, MTH10202, and MTH10203; and <span class=\"pill\">MTH303</span> requires MTH20101 and MTH20102. The longer a module remains incomplete, the more upper-year courses are delayed."},{"selector":"#mistakes h3","index":1,"en":"B. “Co.” means taken together, not passed beforehand"},{"selector":"#mistakes .ex .head","index":2,"en":"Case 3 — PHY10301 was passed but PHY10302 was failed in Semester 1"},{"selector":"#mistakes .ex li","index":6,"en":"In Semester 2, <span class=\"pill\">PHY10302</span> may be registered on its own."},{"selector":"#mistakes .ex li","index":7,"en":"PHY10301 does not need to be retaken, since it was already passed."},{"selector":"#mistakes .ex .head","index":3,"en":"Case 4 — PHY10302, PHY10303, and PHY191 were passed, but PHY10301 was failed, in Semester 1"},{"selector":"#mistakes .ex li","index":8,"en":"In Semester 2, <span class=\"pill no\">PHY10401</span>, <span class=\"pill no\">PHY10402</span>, <span class=\"pill no\">PHY10403</span>, and <span class=\"pill no\">PHY192</span> cannot be registered."},{"selector":"#mistakes .ex li","index":9,"en":"<span class=\"pill co\">PHY10301</span> must be passed first before any of these can be taken."},{"selector":"#map h2","index":0,"en":"<span class=\"num\">03</span> Interactive Course Map"},{"selector":"#map .lede","index":0,"en":"Select any course to see its <strong>prerequisites</strong> and the courses it <strong>unlocks</strong>. Turn on “If this course is failed” mode to see how one F grade can affect the rest of the curriculum."},{"selector":"#map .hint","index":0,"en":"Select a course in the map below"},{"selector":"#map .legend span","index":0,"en":"<i class=\"sw\" style=\"background:var(--ink)\"></i>Selected course"},{"selector":"#map .legend span","index":1,"en":"<i class=\"sw\" style=\"background:var(--brick-pale);border-left:3px solid var(--brick)\"></i>Prerequisite"},{"selector":"#map .legend span","index":2,"en":"<i class=\"sw\" style=\"background:var(--green-pale);border-left:3px solid var(--green)\"></i>Corequisite"},{"selector":"#map .legend span","index":3,"en":"<i class=\"sw\" style=\"background:var(--blue-pale);border-left:3px solid var(--blue)\"></i>Unlocked course"},{"selector":"#terms h2","index":0,"en":"<span class=\"num\">04</span> Complete 8-Semester Study Plan"},{"selector":"#terms .lede","index":0,"en":"The “Prerequisite” column lists courses that must already have been passed. The “Corequisite” column shows courses that must appear in the same registration record."},{"selector":"#blast h2","index":0,"en":"<span class=\"num\">05</span> What Becomes Unavailable If This Course Is Failed?"},{"selector":"#blast .lede","index":0,"en":"Use this section after grades are released to see how an F may affect future study. The right-hand column includes the full chain of consequences; bold course codes are the direct follow-on courses of this one."},{"selector":"#blast .callout","index":0,"en":"<strong>Caution:</strong> Pay close attention to <span class=\"pill\">CHM103</span> and <span class=\"pill\">PHY103</span> in Semester 1, and <span class=\"pill\">CHE103</span> in Semester 2, as they affect many other courses."},{"selector":"#check h2","index":0,"en":"<span class=\"num\">06</span> Six Checks Before Confirming Registration"},{"selector":"#check li","index":0,"en":"Are all courses failed last semester <strong>included in this semester’s registration</strong>?"},{"selector":"#check li","index":1,"en":"For every new course, have <strong>all prerequisite modules been passed</strong>? Check module by module, not only by course title."},{"selector":"#check li","index":2,"en":"When registering for a module marked <strong>Co.</strong>, have you also included its linked Module 1 in the same registration?"},{"selector":"#check li","index":3,"en":"Is the total credit load within the university regulations?"},{"selector":"#check li","index":4,"en":"Will a postponed course conflict with compulsory courses next semester and cause the credit load to exceed the limit?"},{"selector":"footer","index":0,"en":"Prepared from the revised B.E. 2568 Chemical Engineering curriculum map, KMUTT (academic approval: 26 March B.E. 2569). Applicable to student ID 68 from Semester 2/B.E. 2568 onward.<br>This is a simplified guide for understanding the study plan. If any information conflicts with the official curriculum or university regulations, follow the official documents and consult your academic advisor before registration."}];
 const STATIC_NODES=STATIC_TRANSLATIONS.map(item=>{
  const el=document.querySelectorAll(item.selector)[item.index];
  return el?{el,en:item.en,th:el.innerHTML}:null;
@@ -522,7 +518,7 @@ function renderTerms(){
   '<th style="width:250px">'+tr('prereqHeader')+'</th><th>'+tr('coreqName')+'</th></tr>'+ 
   t.c.map(c=>'<tr><td class="c">'+nice(c.k)+'</td><td class="c">'+unitText(c)+'</td>'+ 
    '<td class="w">'+(c.p.length?c.p.map(nice).join(' · '):'<span class="none">—</span>')+'</td>'+ 
-   '<td class="w">'+(c.o.length?c.o.map(nice).join(' · '):'<span class="none">'+courseText(c)+'</span>')+'</td></tr>').join('')+
+   '<td class="w">'+(c.o.length?c.o.map(nice).join(' · '):'<span class="none">—</span>')+'</td></tr>').join('')+
   '</table>').join('');
 }
 
