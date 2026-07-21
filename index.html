@@ -530,7 +530,15 @@ function paint(){
  if(!SEL){panel.innerHTML='<p class="empty">'+tr('emptyMap')+'</p>';return;}
  const c=M[SEL];let up,upc,down,co;
  if(FAILMODE){up=new Set();upc=new Set();down=blast(SEL);co=new Set();}
- else{up=new Set(c.p);upc=new Set(c.cp);co=new Set(c.o);down=new Set([].concat(childrenPre[SEL]||[],childrenCP[SEL]||[],childrenCo[SEL]||[]));}
+ else{
+  up=new Set(c.p);
+  upc=new Set(c.cp);
+  // A corequisite is the same relationship from either course's point of view.
+  // Include both the courses this one names and the courses that name this one.
+  co=new Set([].concat(c.o,childrenCo[SEL]||[]));
+  // Corequisites are not follow-on courses and must not appear as "unlocked".
+  down=new Set([].concat(childrenPre[SEL]||[],childrenCP[SEL]||[]));
+ }
  chips.forEach(x=>{
   const k=x.dataset.k;
   if(k===SEL)x.classList.add('sel');
